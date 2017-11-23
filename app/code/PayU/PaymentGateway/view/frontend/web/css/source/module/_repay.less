@@ -1,0 +1,52 @@
+@repay-border: 1px solid #cccccc;
+
+& when (@media-common = true) {
+    .payu-repay {
+        margin-bottom: 20px;
+
+        .repay {
+            &__method {
+                &:last-child {
+                    border-bottom: @repay-border;
+                }
+
+                .payment-method {
+                    &-title {
+                        padding: 20px 0;
+                        border-top: @repay-border;
+
+                        label {
+                            cursor: pointer;
+                        }
+                    }
+
+                    &-content {
+                        padding: 0 0 20px;
+                    }
+                }
+            }
+        }
+
+        .msg {
+            &__repay {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .payment-loader {
+        display: none;
+        .loader {
+            background-image: url('../images/loader-1.gif');
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 10006;
+            width: 64px;
+            height: 64px;
+        }
+    }
+}

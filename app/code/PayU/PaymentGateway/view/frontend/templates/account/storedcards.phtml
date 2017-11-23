@@ -1,0 +1,63 @@
+<?php
+/**
+ * View for stored cards in my account
+ *
+ * @var \Payu\PaymentGateway\Block\Account\StoredCards $this
+ */
+?>
+<?php
+$storedCards = $this->getStoredCards();
+?>
+<div class="block block-payu-cards payu__cards">
+    <div class="block-content payu-cards__wrapper">
+        <?php if (count($storedCards) > 0): ?>
+            <div class="table-wrapper orders-recent">
+                <table class="data table table-order-items recent" id="my-orders-table">
+                    <caption class="table-caption"><?php echo $this->escapeHtml(__('Saved cards')); ?></caption>
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col"></th>
+                        <th scope="col" class="col"><?php echo $this->escapeHtml(__('Card Number')); ?></th>
+                        <th scope="col" class="col"><?php echo $this->escapeHtml(__('Card Expiration')); ?></th>
+                        <th scope="col" class="col"><?php echo $this->escapeHtml(__('Action')); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    /** @var \stdClass $card Stored Cards from REST API */
+                    foreach ($storedCards as $card):
+                        ?>
+                        <tr class="card">
+                            <td class="col card__logo">
+                                <img src="<?php echo $this->escapeHtml($card->brandImageUrl); ?>"
+                                     alt="<?php echo $this->escapeHtml($card->cardBrand); ?>"/>
+                            </td>
+                            <td class="col card__number"><?php echo $this->escapeHtml($card->cardNumberMasked); ?></td>
+                            <td class="col card__expiration">
+                                <?php echo $this->escapeHtml(
+                                    $card->cardExpirationMonth . '/' . $card->cardExpirationYear
+                                ); ?>
+                            </td>
+                            <td class="col card__action">
+                                <form action="<?php echo $this->escapeHtml(
+                                    $this->getUrl('customer/account/deletestoredcard/')
+                                );
+                                ?>" method="post">
+                                    <?php echo $block->getBlockHtml('formkey') ?>
+                                    <input name="card_id" type="hidden"
+                                           value="<?php echo $this->escapeHtml($card->value); ?>"/>
+                                    <button type="submit"><?php echo $this->escapeHtml(__('Remove card')); ?></button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?php echo $this->escapeHtml(__('You don’t have any saved card.')); ?></span>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

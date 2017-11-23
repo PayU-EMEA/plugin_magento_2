@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var \Payu\PaymentGateway\Block\Order\Grid\Action $this
+ */
+?>
+<?php
+/** @var Magento\Sales\Model\Order $order */
+$order = $this->getData('order');
+if ($order !== null):
+    ?>
+    <a href="<?php echo $this->escapeHtml($this->getViewUrl($order)); ?>" class="action view">
+        <span><?php echo $this->escapeHtml(__('View Order')); ?></span>
+    </a>
+    <?php
+    if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($order->getEntityId())):
+        ?>
+        <a href="#" data-post='<?php /* @escapeNotVerified */
+        echo $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)->getPostData($block->getReorderUrl($order))
+        ?>' class="action order">
+            <span><?php echo $this->escapeHtml(__('Reorder')); ?></span>
+        </a>
+        <?php
+    endif;
+    if ($this->isOrderCanRepay($order->getEntityId())):
+        ?>
+        <a href="<?php echo $this->getOrderRepayUrl($order); ?>" class="action order">
+            <span><?php echo $this->escapeHtml(__('Repay')); ?></span>
+        </a>
+        <?php
+    endif;
+endif;

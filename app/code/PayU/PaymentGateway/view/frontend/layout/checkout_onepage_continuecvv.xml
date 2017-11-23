@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Warning Continue CCV</title>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title" remove="true" />
+        <referenceContainer name="content">
+            <block class="PayU\PaymentGateway\Block\Onepage\ContinueCvv" name="checkout_ccv" template="PayU_PaymentGateway::checkout/continueccv.phtml" cacheable="false"/>
+        </referenceContainer>
+        <referenceContainer name="page.messages" remove="true"/>
+        <move element="logo" destination="checkout.header.wrapper"/>
+        <move element="navigation.sections" destination="checkout.header.wrapper"/>
+    </body>
+</page>

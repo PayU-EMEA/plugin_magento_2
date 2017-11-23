@@ -1,0 +1,33 @@
+& when (@media-common = true) {
+    .block-payu-cards {
+        .card {
+
+            .col {
+                vertical-align: middle;
+            }
+
+            &__logo {
+                img {
+                    max-height: 30px;
+                }
+            }
+
+            &__action {
+                button[type="submit"] {
+                    padding: 0;
+                    box-shadow: none;
+                    border-radius: 0;
+                    background: transparent;
+                    border: 0;
+                    font-weight: 400;
+                    color: #1979c3;
+                    font-size: 1.4rem;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

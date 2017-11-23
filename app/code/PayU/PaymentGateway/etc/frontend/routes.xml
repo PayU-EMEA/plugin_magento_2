@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="payu" frontName="payu">
+            <module name="PayU_PaymentGateway" />
+        </route>
+        <route id="checkout" frontName="checkout">
+            <module name="PayU_PaymentGateway" />
+        </route>
+        <route id="customer" frontName="customer">
+            <module name="PayU_PaymentGateway" />
+        </route>
+        <route id="sales" frontName="sales">
+            <module name="PayU_PaymentGateway" />
+        </route>
+    </router>
+</config>

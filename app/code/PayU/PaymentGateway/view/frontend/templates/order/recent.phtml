@@ -1,0 +1,88 @@
+<?php
+/**
+ * @var \Payu\PaymentGateway\Block\Order\Recent $this
+ */
+?>
+<?php
+$title = $this->escapeHtml(__('Recent Orders'));
+$orderNumberLabel = $this->escapeHtml(__('Order #'));
+$dateLabel = $this->escapeHtml(__('Date'));
+$shipToLabel = $this->escapeHtml(__('Ship To'));
+$orderTotalLabel = $this->escapeHtml(__('Order Total'));
+$statusLabel = $this->escapeHtml(__('Status'));
+?>
+<div class="block block-dashboard-orders">
+    <?php
+    /** @var \Magento\Sales\Model\ResourceModel\Order\Collection $orders */
+    $orders = $block->getOrders();
+    $itemsCount = count($orders->getItems());
+    ?>
+    <div class="block-title order">
+        <strong><?php echo $title; ?></strong>
+        <?php if ($itemsCount > 0): ?>
+            <a class="action view" href="<?php echo $this->escapeHtml($this->getUrl('sales/order/history')); ?>">
+                <span><?php echo $this->escapeHtml(__('View All')); ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+        <?php echo $this->getChildHtml(); ?>
+        <?php if ($itemsCount > 0): ?>
+            <div class="table-wrapper orders-recent">
+                <table class="data table table-order-items recent" id="my-orders-table">
+                    <caption class="table-caption"><?php echo $title; ?></caption>
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col id"><?php echo $orderNumberLabel; ?></th>
+                        <th scope="col" class="col date"><?php echo $dateLabel; ?></th>
+                        <th scope="col" class="col shipping"><?php echo $shipToLabel; ?></th>
+                        <th scope="col" class="col total"><?php echo $orderTotalLabel; ?></th>
+                        <th scope="col" class="col status"><?php echo $statusLabel; ?></th>
+                        <th scope="col" class="col actions"><?php echo $this->escapeHtml(__('Action')); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    /** @var Magento\Sales\Model\Order $order */
+                    foreach ($orders as $order):
+                        ?>
+                        <tr>
+                            <td data-th="<?php echo $orderNumberLabel; ?>" class="col id">
+                                <?php echo $order->getRealOrderId(); ?>
+                            </td>
+                            <td data-th="<?php echo $dateLabel; ?>" class="col date">
+                                <?php echo $this->formatDate($order->getCreatedAt()); ?>
+                            </td>
+                            <td data-th="<?php echo $shipToLabel; ?>" class="col shipping">
+                                <?php echo $order->getShippingAddress() ?
+                                    $this->escapeHtml($order->getShippingAddress()->getName()) : '&nbsp;' ?>
+                            </td>
+                            <td data-th="<?php echo $orderTotalLabel; ?>" class="col total">
+                                <?php
+                                /* @escapeNotVerified */
+                                echo $order->formatPrice($order->getGrandTotal());
+                                ?>
+                            </td>
+                            <td data-th="<?php echo $statusLabel; ?>" class="col status">
+                                <?php echo $order->getStatusLabel(); ?>
+                            </td>
+                            <td data-th="<?php echo $this->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <?php
+                                /** @var PayU\PaymentGateway\Block\Order\Grid\Action $actionBlock */
+                                $actionBlock =
+                                    $this->getChildBlock('order.recent.grid.action')->setData('order', $order);
+                                echo $actionBlock->toHtml();
+                                ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="message info empty">
+                <span><?php echo $this->escapeHtml(__('You have placed no orders.')); ?></span>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

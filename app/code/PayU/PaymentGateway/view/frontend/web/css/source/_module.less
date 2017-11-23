@@ -1,0 +1,205 @@
+@import "./module/_confirm.less";
+@import "./module/_customer-account-cards.less";
+@import "./module/_repay.less";
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+  .checkout-index-index, .sales-order-repayview {
+    .payu-payment {
+
+      &._active {
+        .payment-method-content {
+          display: block;
+        }
+      }
+
+      &__logo {
+        max-height: 25px;
+        margin-bottom: -5px;
+      }
+
+      .payment {
+
+        &-method-content {
+          display: none;
+        }
+
+        &__method {
+          padding: 0 0 20px 0;
+          border-bottom: 1px solid #dcdcdc;
+
+          .method {
+            &__single {
+              position: relative;
+              display: inline-block;
+              box-sizing: border-box;
+              padding: 2px;
+              width: 100%;
+              height: 60px;
+              float: left;
+
+              &--content {
+                width: 100%;
+                height: 100%;
+
+                label {
+                  display: block;
+                }
+
+                img {
+                  max-height: calc(~'100% - 18px');
+                  max-width: calc(~'100% - 18px');
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  margin-right: -50%;
+                  transform: translate(-50%, -50%);
+                }
+
+                &__image {
+                  display: block;
+                  position: relative;
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+
+              &:nth-child(5n + 1) {
+                padding-left: 0;
+              }
+
+              &--clear {
+                clear: both;
+              }
+            }
+          }
+
+          .payu-card, .payu-pex {
+            margin-bottom: 10px;
+            cursor: pointer;
+
+            &__img-wrapper {
+              text-align: center;
+              min-width: 100px;
+              font-size: 0;
+
+              > * {
+                font-size: 1em;
+              }
+            }
+
+            &__info {
+              list-style: none;
+              position: relative;
+              display: table;
+              box-sizing: border-box;
+
+              > * {
+                display: table-cell;
+                vertical-align: middle;
+              }
+
+              span {
+                padding-left: 20px;
+              }
+
+              img {
+                max-height: 30px;
+              }
+            }
+          }
+
+          .method__single--content,
+          .payu-card,
+          .payu-pex {
+            box-sizing: border-box;
+            padding: 7px;
+            border: 1px solid #dcdcdc;
+            border-radius: 3px;
+
+            &:not(._disabled) {
+              cursor: pointer;
+
+              &:hover {
+                background: rgba(220, 220, 220, 0.5);
+                border-color: grey;
+              }
+
+              &:focus {
+                border-color: darkgreen;
+              }
+
+              &._active {
+                background: rgba(220, 220, 220, 0.5);
+                border-color: darkgreen;
+              }
+            }
+
+            &._disabled {
+              -webkit-filter: grayscale(1);
+              filter: grayscale(1);
+              opacity: 0.5;
+              cursor: default;
+            }
+          }
+        }
+
+        &__payu-agreement {
+          .payu-agreement {
+            &__wrapper {
+              margin-top: 20px;
+
+              > * {
+                margin-bottom: 10px;
+              }
+
+              .payu {
+                &-text {
+                  font-size: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .actions-toolbar {
+      .action.primary {
+        margin-top: 20px;
+      }
+    }
+
+    .payu-msg {
+      .msg {
+        &__error {
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  .checkout-index-index, .sales-order-repayview {
+    .payu-payment {
+      .payment {
+        &__method {
+          .method {
+            &__single {
+              width: 100%/6;
+            }
+          }
+        }
+      }
+    }
+  }
+}

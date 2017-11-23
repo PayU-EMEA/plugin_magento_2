@@ -1,0 +1,74 @@
+<div class="payment-method payu-payment" data-bind="css: {'_active': isPayuSelected()}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {id: getCode()}, value: getCode(), checked: isChecked"/>
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <img class="payu-payment__logo" data-bind="attr: {src: logoSrc}"/>
+            <span data-bind="i18n: 'Pay with PayU'"></span>
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <div class="field required">
+            <div class="payment__method">
+                <div class="method__list" data-bind="visible: isPayuSelected(),
+                                                     foreach: methods">
+                    <div class="method__single">
+                        <div class="method__single--content"
+                             data-bind="attr: {tabindex: $index}, css: {'_disabled': $data.status !== $parent.enabledStatus, '_active': $data.value === $parent.payuMethod() }, click: $parent.setPayuMethod.bind($parent)">
+                            <span class="method__single__image"><img data-bind="attr: {src: $data.brandImageUrl}"/></span>
+                        </div>
+                    </div>
+                    <!-- ko if: $parent.isLastMethod($index) -->
+                    <div class="method__single--clear"></div>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <!-- ko if: locale === 'pl' -->
+        <div class="payment__payu-agreement">
+            <div class="payu-agreement__wrapper">
+                <div class="payu-checkbox">
+                    <input type="checkbox" data-bind="checked: payuAgreement,
+                                                          id: 'payu_payment-' + getCode() + '-agreement'"/>
+                    <span data-bind="i18n: 'I accept '"></span>
+                    <a target="_blank" data-bind="attr: {href: termsUrl}">
+                        <span data-bind="i18n: 'Terms and Conditions of the single transaction in of PayU'"></span>
+                    </a>
+                </div>
+                <p class="payu-text"
+                   data-bind="i18n: 'Payment order: Payment is processed by PayU SA;The recipient\'s data, the payment title and the amount are provided to PayU SA by the recipient;The order is sent for processing when PayU SA receives your payment. The payment is transferred to the recipient within 1 hour, not later than until the end of the next business day;PayU SA does not charge any service fees.'"></p>
+                <p class="payu-text"
+                   data-bind="i18n: 'The administrator of your personal data within the meaning of the Personal Data Protection Act of 29 August 1997 (Journal of Laws of 2002, No. 101, item 926 as amended) is PayU SA with the registered office in Poznań (60-166) at ul. Grunwaldzka 182. Your personal data will be processed according to the applicable provisions of law for archiving and service provision purposes. Your data will not be made available to other entities, except of entities authorized by law. You are entitled to access and edit your data. Data provision is voluntary but required to achieve the above-mentioned purposes.'"></p>
+            </div>
+            <!-- ko if: !payuAgreement() && locale !== 'pl' -->
+            <div class="payu-msg">
+                <p class="msg msg__error" data-bind="text: agreementText"></p>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: repay,
+                        attr: {title: $t('Repay'), disabled: !valid() || isPending() }
+                        ">
+                    <span data-bind="i18n: 'Repay'"></span>
+                </button>
+            </div>
+        </div>
+        <div id="payment-loader" data-role="payment-loader" class="loading-mask payment-loader">
+            <div class="loader">    
+            </div>
+        </div>
+        <!-- ko if: repayErrorMsg -->
+        <div class="payu-msg">
+            <p class="msg msg__repay msg__error" data-bind="text: repayErrorMsg"></p>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

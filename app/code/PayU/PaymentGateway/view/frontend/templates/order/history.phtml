@@ -1,0 +1,91 @@
+<?php
+/**
+ * @var \Payu\PaymentGateway\Block\Order\History $this
+ */
+?>
+<?php
+$orderNumberLabel = $this->escapeHtml(__('Order #'));
+$dateLabel = $this->escapeHtml(__('Date'));
+$shipToLabel = $this->escapeHtml(__('Ship To'));
+$orderTotalLabel = $this->escapeHtml(__('Order Total'));
+$statusLabel = $this->escapeHtml(__('Status'));
+$orders = $block->getOrders();
+echo $block->getChildHtml('info');
+if ($orders && count($orders)):
+    ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */
+                echo __('Orders') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?php echo $orderNumberLabel; ?></th>
+                <th scope="col" class="col date"><?php echo $dateLabel; ?></th>
+                <?php
+                /* @noEscape */
+                echo $this->getChildHtml('extra.column.header');
+                ?>
+                <th scope="col" class="col shipping"><?php echo $shipToLabel; ?></th>
+                <th scope="col" class="col total"><?php echo $orderTotalLabel; ?></th>
+                <th scope="col" class="col status"><?php echo $statusLabel; ?></th>
+                <th scope="col" class="col actions">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            /** @var Magento\Sales\Model\Order $order */
+            foreach ($orders as $order):
+                ?>
+                <tr>
+                    <td data-th="<?php echo $orderNumberLabel; ?>" class="col id">
+                        <?php echo $this->escapeHtml($order->getRealOrderId()); ?>
+                    </td>
+                    <td data-th="<?php echo $dateLabel; ?>" class="col date">
+                        <?php echo $this->escapeHtml($this->formatDate($order->getCreatedAt())); ?>
+                    </td>
+                    <?php
+                    /** @var \Magento\Sales\Block\Order\History\Container $extra */
+                    $extra = $block->getChildBlock('extra.container');
+                    if ($extra) {
+                        $extra->setOrder($order);
+                        /* @noEscape */
+                        echo $extra->getChildHtml();
+                    }
+                    ?>
+                    <td data-th="<?php echo $shipToLabel; ?>" class="col shipping">
+                        <?php
+                        echo $order->getShippingAddress() ? $this->escapeHtml($order->getShippingAddress()->getName()) :
+                            '&nbsp;';
+                        ?>
+                    </td>
+                    <td data-th="<?php echo $orderTotalLabel; ?>" class="col total">
+                        <?php
+                        /* @escapeNotVerified */
+                        echo $order->formatPrice($order->getGrandTotal());
+                        ?>
+                    </td>
+                    <td data-th="<?php echo $statusLabel; ?>" class="col status">
+                        <?php echo $this->escapeHtml($order->getStatusLabel()); ?>
+                    </td>
+                    <td data-th="<?php echo $this->escapeHtml(__('Actions')); ?>" class="col actions">
+                        <?php
+                        /** @var PayU\PaymentGateway\Block\Order\Grid\Action $actionBlock */
+                        $actionBlock = $this->getChildBlock('order.history.grid.action')->setData('order', $order);
+                        echo $actionBlock->toHtml();
+                        ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+    <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php
+endif;
+else:
+    ?>
+    <div class="message info empty">
+        <span><?php echo $this->escapeHtml(__('You have placed no orders.')); ?></span>
+    </div>
+<?php endif;

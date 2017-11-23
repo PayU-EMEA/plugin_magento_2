@@ -1,0 +1,55 @@
+<?php
+/**
+ * @var \Payu\PaymentGateway\Block\Order\Repay\PaymentMethods $this
+ */
+?>
+<?php
+$config = $this->getPaymentGatewayConfig();
+$cardConfig = $this->getCardPaymentGatewayConfig();
+?>
+    <div class="payu-repay repay">
+        <div class="repay__header">
+            <h2><?php echo __('Select payment method:') ?></h2>
+        </div>
+        <div class="repay__methods">
+            <div class="repay__method" id="payu_gateway_slot" data-bind="scope: 'payu_gateway'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+            <div class="repay__method" id="payu_gateway_card_slot" data-bind="scope: 'payu_gateway_card'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+        </div>
+    </div>
+<?php if (!empty($config)): ?>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "payu_gateway": {
+                        "component" : "PayU_PaymentGateway/js/view/order/payu_gateway",
+                        "config" : <?php echo $config; ?>
+                    }
+                }
+            }
+        }
+    }
+    </script>
+<?php endif;
+if (!empty($cardConfig)):
+    ?>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "payu_gateway_card": {
+                        "component" : "PayU_PaymentGateway/js/view/order/payu_gateway_card",
+                        "config" : <?php echo $cardConfig; ?>
+                    }
+                }
+            }
+        }
+    }
+    </script>
+<?php endif;

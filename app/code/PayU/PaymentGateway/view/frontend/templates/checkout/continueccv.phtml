@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var \Payu\PaymentGateway\Block\Onepage\ContinueCvv|\Payu\PaymentGateway\Block\Order\Repay\ContinueCvv $this
+ */
+?>
+<?php
+$widgetConfig = $this->getWidgetCvvConfig();
+if ($widgetConfig !== null): ?>
+    <div class="payu-block">
+        <div class="payu-block__wrapper">
+            <div class="payu-block__header">
+                <h1><?php echo __('Confirm card CVV code:') ?></h1>
+            </div>
+            <div class="payu-block__content payu-block__content">
+                <div id="payu-widget"></div>
+            </div>
+        </div>
+    </div>
+    <script <?php echo $widgetConfig; ?>></script>
+    <script type="text/x-magento-init">
+            {
+                "*": {
+                    "tokenHandler": {
+                        "redirectUrl": "<?php echo $this->getRedirectUrl(); ?>"
+                    }
+                }
+            }
+    </script>
+    <?php
+endif;
+
+

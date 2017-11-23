@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="payment_method_assign_data">
+        <observer name="payu_payment_gateway_data_assign" instance="PayU\PaymentGateway\Observer\DataAssignObserver"/>
+    </event>
+    <event name="sales_order_payment_place_end">
+        <observer name="payu_payment_gateway_after_place_order" instance="PayU\PaymentGateway\Observer\AfterPlaceOrderObserver"/>
+    </event>
+    <event name="sales_order_payment_transaction_html_txn_id">
+        <observer name="payu_payment_gateway_order_payment_transaction_html_txn_id" instance="PayU\PaymentGateway\Observer\PaymentTransactionTxnIdHtml" />
+    </event>
+    <event name="payu_accept_order_payment">
+        <observer name="payu_accept_order_payment" instance="PayU\PaymentGateway\Observer\AcceptOrderPaymentInvoice" />
+    </event>
+    <event name="payu_close_repayment_transaction">
+        <observer name="payu_cancel_transaction" instance="PayU\PaymentGateway\Observer\CancelTransaction" />
+    </event>
+    <event name="payu_deny_payment">
+        <observer name="payu_deny_payment_status_assign" instance="PayU\PaymentGateway\Observer\StatusAssignObserver"/>
+    </event>
+    <event name="sales_quote_collect_totals_after">
+        <observer name="payu_cmp_collect_totals" instance="PayU\PaymentGateway\Observer\McpCollectTotals" />
+    </event>
+</config>
