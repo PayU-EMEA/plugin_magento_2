@@ -18,7 +18,11 @@
             <p class="greeting">{{trans "%customer_name," customer_name=$order.getCustomerName()}}</p>
             <p>
                 {{trans "Thank you for your order from %store_name." store_name=$store.getFrontendName()}}
+            </p>
+            <p>
                 {{trans 'You can repay this order by <a href="%repay_url">this link</a>.' repay_url=$repay_url |raw}}
+            </p>
+            <p>
                 {{trans 'You can check the status of your order by <a href="%account_url">logging into your account</a>.' account_url=$this.getUrl($store,'customer/account/',[_nosid:1]) |raw}}
             </p>
             <p>

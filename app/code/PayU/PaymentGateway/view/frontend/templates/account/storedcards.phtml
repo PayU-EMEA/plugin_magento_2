@@ -13,7 +13,7 @@ $storedCards = $this->getStoredCards();
         <?php if (count($storedCards) > 0): ?>
             <div class="table-wrapper orders-recent">
                 <table class="data table table-order-items recent" id="my-orders-table">
-                    <caption class="table-caption"><?php echo $this->escapeHtml(__('Saved cards')); ?></caption>
+                    <caption class="table-caption"><?php echo $this->escapeHtml(__('Stored cards')); ?></caption>
                     <thead>
                     <tr>
                         <th scope="col" class="col"></th>
@@ -56,7 +56,7 @@ $storedCards = $this->getStoredCards();
             </div>
         <?php else: ?>
             <div class="message info empty">
-                <span><?php echo $this->escapeHtml(__('You don’t have any saved card.')); ?></span>
+                <span><?php echo $this->escapeHtml(__('You don’t have any stored card.')); ?></span>
             </div>
         <?php endif; ?>
     </div>
