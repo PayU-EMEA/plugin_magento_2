@@ -133,7 +133,7 @@ class Config implements PayUConfigInterface
                 $this->multiCurrencyPartnerId =
                     $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'mcp_partner_id', $environmentSuffix, true);
             }
-            $this->setSender('Magento ver ' . $this->metadata->getVersion() . '/Plugin ver ' . static::PLUGIN_VERSION);
+            $this->setSender('Magento 2 ver ' . $this->metadata->getVersion() . '/Plugin ver ' . static::PLUGIN_VERSION);
         } catch (\OpenPayU_Exception_Configuration $exception) {
             return $this;
         }
