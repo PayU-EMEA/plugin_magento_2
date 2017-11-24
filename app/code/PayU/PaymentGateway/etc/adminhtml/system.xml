@@ -6,6 +6,7 @@
             <resource>PayU_PaymentGateway::payu_gateway</resource>
             <group id="payu_gateway" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>PayU</label>
+                <comment><![CDATA[If you do not already have PayU merchant account, <a href="https://secure.payu.com/boarding/#/form&pk_campaign=Plugin&pk_kwd=Magento2">please register in Production</a> or <a href="https://secure.snd.payu.com/boarding/#/form&pk_campaign=Plugin&pk_kwd=Magento2">please register in Production</a>]]></comment>
                 <group id="main_parameters" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Main parameters</label>
                     <attribute type="expanded">1</attribute>
@@ -19,6 +20,7 @@
                     </field>
                     <field id="payment_methods_order" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Payment Methods Order</label>
+                        <comment><![CDATA[Enter payment methods values separated by comma. <href="http://developers.payu.com/pl/overview.html#paymethods">List of payment methods</a>]]></comment>
                     </field>
                 </group>
                 <group id="pos_parameters" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -78,6 +80,7 @@
                 <field id="repayment" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable repayment?</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Automatic collection on the POS should be disabled. <href="https://github.com/PayU/plugin_magento_2#ponowienie-płatności">More information</a>]]></comment>
                 </field>
                 <field id="sort_order" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
@@ -163,14 +166,17 @@
                 <field id="store_card" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable store card?</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Additional configuration in PayU is needed. <href="https://github.com/PayU/plugin_magento_2#zapisywanie-kart">More information</a>]]></comment>
                 </field>
                 <field id="repayment" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable repayment?</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Automatic collection on the POS should be disabled. <href="https://github.com/PayU/plugin_magento_2#ponowienie-płatności">More information</a>]]></comment>
                 </field>
                 <field id="currency_rates" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable currency rates?</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Additional configuration in PayU is needed. <href="https://github.com/PayU/plugin_magento_2#przewalutowanie">More information</a>]]></comment>
                 </field>
                 <field id="sort_order" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
