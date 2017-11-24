@@ -42,7 +42,7 @@ Moduł dodaje dwie metody płatności:
 
 **Ważne:** Moduł ta działa tylko z punktem płatności typu `REST API` (Checkout), jeżeli nie posiadasz jeszcze konta w systemie PayU [**zarejestruj się w systemie produkcyjnym**][ext1] lub [**zarejestruj się w systemie sandbox**][ext5]
 
-* Wersja PHP zgodna z wymaganiami względem danej wersji sklepu
+* Wersja PHP zgodna z wymaganiami zainstalowanej wersji Magento 2
 * Rozszerzenia PHP: [cURL][ext2] i [hash][ext3].
 
 ## Instalacja
