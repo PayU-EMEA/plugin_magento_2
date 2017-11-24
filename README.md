@@ -13,7 +13,7 @@
 1. [Konfiguracja](#konfiguracja)
     * [Parametry](#parametry)
 1. [Informacje o cechach](#informacje-o-cechach)
-    * [Kolejność metod płatności](#kolejnosc-metod-platnosci)
+    * [Kolejność metod płatności](#kolejność-metod-płatności)
     * [Ponowienie płatności](#ponowienie-płatności)
     * [Zapisywanie kart](#zapisywanie-kart)
     * [Przewalutowanie](#przewalutowanie)
@@ -72,7 +72,7 @@ Moduł dodaje dwie metody płatności:
 |---------|-----------|
 | Czy włączyć wtyczkę? | Określa czy metoda płatności będzie dostępna w sklepie na liście płatności. |
 | Tryb Sandbox | Określa czy płatności będą realizowane na środowisku testowym (sandbox) PayU. |
-| Kolejność metod płatności | Określa kolejnośc wyświetlanych metod płatności (dostępne tylko dla `Płatność PayU`) [więcej informacji](#kolejnosc-metod-platnosci). |
+| Kolejność metod płatności | Określa kolejnośc wyświetlanych metod płatności (dostępne tylko dla `Płatność PayU`) [więcej informacji](#kolejność-metod-płatności). |
 
 #### Parametry punktu płatności (POS)
 
@@ -148,7 +148,7 @@ W celu uruchomienia i konfiguracji usługi należy skontaktować się z opiekune
 [ext1]: https://secure.payu.com/boarding/#/form&pk_campaign=Plugin-Github&pk_kwd=Magento2
 [ext2]: http://php.net/manual/en/book.curl.php
 [ext3]: http://php.net/manual/en/book.hash.php
-[ext4]: https://github.com/PayU/plugin_magento/releases/latest
+[ext4]: https://github.com/PayU/plugin_magento_2/releases/latest
 [ext5]: https://secure.snd.payu.com/boarding/#/form&pk_campaign=Plugin-Github&pk_kwd=Magento2
 [ext6]: http://developers.payu.com/pl/overview.html#paymethods
 
