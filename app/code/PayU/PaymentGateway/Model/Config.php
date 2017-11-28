@@ -25,7 +25,7 @@ class Config implements PayUConfigInterface
     /**
      * Current Plugin Version
      */
-    const PLUGIN_VERSION = '1.0';
+    const PLUGIN_VERSION = '1.0.1';
 
     /**
      * @var \OpenPayU_Configuration
@@ -182,6 +182,14 @@ class Config implements PayUConfigInterface
         $this->setGatewayConfigCode(CardConfigProvider::CODE);
 
         return (bool)$this->gatewayConfig->getValue('currency_rates', $this->storeId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPluginVersion()
+    {
+        return static::PLUGIN_VERSION;
     }
 
     /**

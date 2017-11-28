@@ -26,7 +26,7 @@ define(
                         locale: window.checkoutConfig.payment.payuGateway.locale,
                         methods: toArray(JSON.parse(window.checkoutConfig.payment.payuGateway.payByLinks)),
                         payuMethod: ko.observable(false),
-                        payuAgreement: ko.observable(false),
+                        payuAgreement: ko.observable(true),
                         agreementText: $t('You must accept the "Terms of a single PayU payment transaction"'),
                         enabledStatus: 'ENABLED'
                     },

@@ -2,6 +2,7 @@
 
 namespace PayU\PaymentGateway\Model;
 
+use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Payment\Gateway\Data\OrderAdapterInterface;
@@ -53,6 +54,11 @@ class CreateOrderResolver implements CreateOrderResolverInterface
     private $order;
 
     /**
+     * @var ProductMetadataInterface
+     */
+    private $metadata;
+
+    /**
      * @var PayUGetMultiCurrencyPricingInterface
      */
     private $currencyPricing;
@@ -84,6 +90,7 @@ class CreateOrderResolver implements CreateOrderResolverInterface
      * @param PayUMcpExchangeRateResolverInterface $exchangeRateResolver
      * @param PayUConfigInterface $payUConfig
      * @param StoreManagerInterface $storeManager
+     * @param ProductMetadataInterface $metadata
      */
     public function __construct(
         UrlInterface $urlBuilder,
@@ -94,7 +101,8 @@ class CreateOrderResolver implements CreateOrderResolverInterface
         PayUGetMultiCurrencyPricingInterface $currencyPricing,
         PayUMcpExchangeRateResolverInterface $exchangeRateResolver,
         PayUConfigInterface $payUConfig,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        ProductMetadataInterface $metadata
     ) {
         $this->urlBuilder = $urlBuilder;
         $this->availableLocale = $availableLocale;
@@ -105,6 +113,7 @@ class CreateOrderResolver implements CreateOrderResolverInterface
         $this->exchangeRateResolver = $exchangeRateResolver;
         $this->payUConfig = $payUConfig;
         $this->store = $storeManager->getStore();
+        $this->metadata = $metadata;
     }
 
     /**
@@ -122,6 +131,7 @@ class CreateOrderResolver implements CreateOrderResolverInterface
         $paymentData = [
             'txn_type' => 'A',
             'description' => $this->getOrderDescription(),
+            'additionalDescription' => $this->getAdditionalDescription(),
             'customerIp' => $this->order->getRemoteIp(),
             'extOrderId' => $this->getExtOrderId(),
             'totalAmount' => $this->getFormatAmount($this->order->getGrandTotalAmount()),
@@ -154,6 +164,16 @@ class CreateOrderResolver implements CreateOrderResolverInterface
     private function getOrderDescription()
     {
         return __('Order %1 from store %2', $this->order->getOrderIncrementId(), $this->urlBuilder->getBaseUrl());
+    }
+
+    /**
+     * Get additional description for order
+     *
+     * @return string
+     */
+    private function getAdditionalDescription()
+    {
+        return 'Magento 2 ver ' . $this->metadata->getVersion() . ' / Plugin ver ' . $this->payUConfig->getPluginVersion();
     }
 
     /**
