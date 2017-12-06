@@ -49,7 +49,7 @@ Moduł dodaje dwie metody płatności:
 
 1. Pobierz najnowszą wersję moduł z [repozytorium GitHub][ext4]
 1. Rozpakuj pobrany plik
-1. Połącz się z serwerem ftp i skopiuj katalogi `app` i `lib` z rozpakowanego pliku do katalogu głównego swojego sklepu Magento 2
+1. Połącz się z serwerem ftp i skopiuj rozpakowaną zawartość do katalogu `app/code/PayU/PaymentGateway` swojego sklepu Magento 2. Jeżeli nie ma takiego katalogu utwórz go.
 1. Z poziomu konsoli uruchom:
    * php bin/magento module:enable PayU_PaymentGateway
    * php bin/magento setup:upgrade

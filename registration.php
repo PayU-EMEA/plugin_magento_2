@@ -1,4 +1,5 @@
 <?php
+require_once('lib/openpayu.php');
 
 /**
  * Register PayU_PaymentGateway Component
