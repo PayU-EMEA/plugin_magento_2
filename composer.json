@@ -1,5 +1,5 @@
 {
-    "name": "payu/payment-gateway",
+    "name": "payu/magento2-payment-gateway",
     "description": "PayU integration with payment gateway",
     "type": "magento2-module",
     "version": "1.0.1",

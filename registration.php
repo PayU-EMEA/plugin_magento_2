@@ -1,5 +1,5 @@
 <?php
-require_once(BP . '/lib/internal/OpenPayU/openpayu.php');
+require_once('lib/openpayu.php');
 
 /**
  * Register PayU_PaymentGateway Component
