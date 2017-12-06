@@ -10,7 +10,8 @@
         "magento/module-checkout": "100.0.*",
         "magento/module-payment": "100.0.*",
         "magento/framework": "100.0.*",
-        "magento/magento-composer-installer": "100.0.*"
+        "magento/magento-composer-installer": "100.0.*",
+        "openpayu/openpayu": "2.2.*"
     },
     "autoload": {
         "files": [
