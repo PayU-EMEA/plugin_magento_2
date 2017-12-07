@@ -1,16 +1,26 @@
 {
     "name": "payu/magento2-payment-gateway",
-    "description": "PayU integration with payment gateway",
+    "description": "Official PayU integration plugin for Magento 2",
+    "keywords": [
+        "payu",
+        "payu easy and plus merchant",
+        "payment processing",
+        "payment module",
+        "payu magento 2 module",
+        "payu magento 2"
+    ],
     "type": "magento2-module",
     "version": "1.1.0",
-    "license": "GPL-3.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
     "require": {
-        "php": "~5.5.0|~5.6.0|~7.0.0",
-        "magento/module-sales": "100.0.*",
-        "magento/module-checkout": "100.0.*",
-        "magento/module-payment": "100.0.*",
-        "magento/framework": "100.0.*",
-        "magento/magento-composer-installer": "100.0.*"
+        "php": "~5.5.0|~5.6.0|~7.0.0|~7.1.0",
+        "magento/module-sales": ">100.0",
+        "magento/module-checkout": ">100.0",
+        "magento/module-payment": ">100.0",
+        "magento/framework": ">100.0"
     },
     "autoload": {
         "files": [
@@ -19,5 +29,11 @@
         "psr-4": {
             "PayU\\PaymentGateway\\": ""
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "PayU S.A.",
+            "homepage": "https://payu.pl/"
+        }
+    ]
 }

@@ -20,7 +20,7 @@
 
 
 ## Cechy
-Moduł płatności PayU dodaje do Magento 2 opcję płatności PayU.
+Moduł płatności PayU dodaje do Magento 2 opcję płatności PayU. Moduł współpracuje z Magento 2 w wersjach: >2.0.6, 2.1, 2.2
 
 Możliwe są następujące operacje:
   * Utworzenie płatności w sytemie PayU
@@ -47,10 +47,15 @@ Moduł dodaje dwie metody płatności:
 
 ## Instalacja
 
+#### Przy użyciu Composer
+`composer require payu/magento2-payment-gateway`
+
+#### Kopiując pliki na serwer
 1. Pobierz najnowszą wersję moduł z [repozytorium GitHub][ext4]
 1. Rozpakuj pobrany plik
 1. Połącz się z serwerem ftp i skopiuj rozpakowaną zawartość do katalogu `app/code/PayU/PaymentGateway` swojego sklepu Magento 2. Jeżeli nie ma takiego katalogu utwórz go.
-1. Z poziomu konsoli uruchom:
+
+Po instalacji przy użyciu Composer lub kopiując pliki z poziomu konsoli uruchom:
    * php bin/magento module:enable PayU_PaymentGateway
    * php bin/magento setup:upgrade
    * php bin/magento setup:di:compile
