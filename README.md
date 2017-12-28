@@ -150,11 +150,11 @@ W celu uruchomienia i konfiguracji usługi należy skontaktować się z opiekune
 
 <!--external links:-->
 [ext0]: https://github.com/PayU/plugin_magento_160
-[ext1]: https://secure.payu.com/boarding/#/form&pk_campaign=Plugin-Github&pk_kwd=Magento2
+[ext1]: https://secure.payu.com/boarding/?pk_campaign=Plugin-Github&pk_kwd=Magento2#/form
 [ext2]: http://php.net/manual/en/book.curl.php
 [ext3]: http://php.net/manual/en/book.hash.php
 [ext4]: https://github.com/PayU/plugin_magento_2/releases/latest
-[ext5]: https://secure.snd.payu.com/boarding/#/form&pk_campaign=Plugin-Github&pk_kwd=Magento2
+[ext5]: https://secure.snd.payu.com/boarding/?pk_campaign=Plugin-Github&pk_kwd=Magento2#/form
 [ext6]: http://developers.payu.com/pl/overview.html#paymethods
 
 <!--images:-->

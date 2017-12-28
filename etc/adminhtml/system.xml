@@ -6,7 +6,7 @@
             <resource>PayU_PaymentGateway::payu_gateway</resource>
             <group id="payu_gateway" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>PayU</label>
-                <comment><![CDATA[If you do not already have PayU merchant account, <a href="https://secure.payu.com/boarding/#/form&pk_campaign=Plugin&pk_kwd=Magento2">please register in Production</a> or <a href="https://secure.snd.payu.com/boarding/#/form&pk_campaign=Plugin&pk_kwd=Magento2">please register in Production</a>]]></comment>
+                <comment><![CDATA[If you do not already have PayU merchant account, <a href="https://secure.payu.com/boarding/?pk_campaign=Plugin&pk_kwd=Magento2#/form" target="_blank">please register in Production</a> or <a href="https://secure.snd.payu.com/boarding/?pk_campaign=Plugin&pk_kwd=Magento2#/form" target="_blank">please register in Sandbox</a>]]></comment>
                 <group id="main_parameters" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Main parameters</label>
                     <attribute type="expanded">1</attribute>
