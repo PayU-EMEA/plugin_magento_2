@@ -9,6 +9,6 @@
     <update handle="sales_email_order_renderers"/>
     <update handle="sales_email_item_price"/>
     <body>
-        <referenceBlock name="order_totals" class="PayU\PaymentGateway\Block\Sales\Order\Totals" template="Magento_Sales::order/totals.phtml" />
+        <block name="order_totals" class="PayU\PaymentGateway\Block\Sales\Order\Totals" template="Magento_Sales::order/totals.phtml" />
     </body>
 </page>
