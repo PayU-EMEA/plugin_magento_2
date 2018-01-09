@@ -94,6 +94,7 @@ class GetPayMethods implements PayUGetPayMethodsInterface
                 if ((bool)$this->gatewayConfig->getValue('main_parameters/active', $this->storeId)) {
                     $this->removeCreditCard();
                 }
+                $this->removeTestPayment();
             }
         } catch (\OpenPayU_Exception $exception) {
             $this->logger->critical($exception->getMessage());
@@ -148,6 +149,21 @@ class GetPayMethods implements PayUGetPayMethodsInterface
             $this->result,
             function ($payByLink) {
                 return $payByLink->value !== PayUGetPayMethodsInterface::CREDIT_CARD_CODE;
+            }
+        );
+    }
+
+    /**
+     * Remove test payment when disabled
+     *
+     * @return void
+     */
+    private function removeTestPayment()
+    {
+        $this->result = array_filter(
+            $this->result,
+            function ($payByLink) {
+                return !($payByLink->value === PayUGetPayMethodsInterface::TEST_PAYMENT_CODE && $payByLink->status !== PayUGetPayMethodsInterface::PAYMETHOD_STATUS_ENABLED);
             }
         );
     }
