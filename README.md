@@ -10,6 +10,7 @@
 1. [Cechy](#cechy)
 1. [Wymagania](#wymagania)
 1. [Instalacja](#instalacja)
+1. [Aktualizacja](#aktualizacja)
 1. [Konfiguracja](#konfiguracja)
     * [Parametry](#parametry)
 1. [Informacje o cechach](#informacje-o-cechach)
@@ -60,6 +61,9 @@ Po instalacji przy użyciu Composer lub kopiując pliki z poziomu konsoli urucho
    * php bin/magento setup:upgrade
    * php bin/magento setup:di:compile
    * php bin/magento setup:static-content:deploy
+
+## Aktualizacja
+Aktualizując plugin z wersji starszej niż 1.2.0 należy po aktualizacji pluginu ponownie podać i zapisać konfigurację POS-ów.
 
 ## Konfiguracja
 

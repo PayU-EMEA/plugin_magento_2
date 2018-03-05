@@ -32,17 +32,14 @@
                     </field>
                     <field id="second_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Second key (MD5)</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="client_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_id</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="client_secret" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_secret</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <depends>
@@ -59,17 +56,14 @@
                     </field>
                     <field id="sandbox_second_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Second key (MD5)</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="sandbox_client_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_id</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="sandbox_client_secret" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_secret</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <depends>
@@ -110,22 +104,18 @@
                     </field>
                     <field id="second_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Second key (MD5)</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="client_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_id</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="client_secret" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_secret</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="mcp_partner_id" translate="labael" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Multi Currency Pricing - partner ID</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     </field>
                     <depends>
                         <field id="*/*/main_parameters/active">1</field>
@@ -141,22 +131,18 @@
                     </field>
                     <field id="sandbox_second_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Second key (MD5)</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="sandbox_client_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_id</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="sandbox_client_secret" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>OAuth protocol - client_secret</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                         <validate>validate-no-empty</validate>
                     </field>
                     <field id="sandbox_mcp_partner_id" translate="labael" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Multi Currency Pricing - partner ID</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     </field>
                     <depends>
                         <field id="*/*/main_parameters/active">1</field>
