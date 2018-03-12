@@ -25,7 +25,7 @@ class Config implements PayUConfigInterface
     /**
      * Current Plugin Version
      */
-    const PLUGIN_VERSION = '1.2.0-DEV';
+    const PLUGIN_VERSION = '1.2.0';
 
     /**
      * @var \OpenPayU_Configuration
