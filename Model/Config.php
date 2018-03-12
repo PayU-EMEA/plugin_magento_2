@@ -25,7 +25,7 @@ class Config implements PayUConfigInterface
     /**
      * Current Plugin Version
      */
-    const PLUGIN_VERSION = '1.1.1';
+    const PLUGIN_VERSION = '1.2.0-DEV';
 
     /**
      * @var \OpenPayU_Configuration
@@ -120,18 +120,18 @@ class Config implements PayUConfigInterface
                 $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'pos_id', $environmentSuffix)
             );
             $this->setSignatureKey(
-                $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'second_key', $environmentSuffix, true)
+                $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'second_key', $environmentSuffix)
             );
             $this->setOauthClientId(
-                $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'client_id', $environmentSuffix, true)
+                $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'client_id', $environmentSuffix)
             );
             $this->setOauthClientSecret(
-                $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'client_secret', $environmentSuffix, true)
+                $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'client_secret', $environmentSuffix)
             );
             $this->setOauthGrantType(PayUConfigInterface::GRANT_TYPE_CLIENT_CREDENTIALS);
             if ($code === CardConfigProvider::CODE) {
                 $this->multiCurrencyPartnerId =
-                    $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'mcp_partner_id', $environmentSuffix, true);
+                    $this->getGatewayConfig(static::GROUP_POS_PARAMETERS, 'mcp_partner_id', $environmentSuffix);
             }
             $this->setSender('Magento 2 ver ' . $this->metadata->getVersion() . '/Plugin ver ' . static::PLUGIN_VERSION);
         } catch (\OpenPayU_Exception_Configuration $exception) {
@@ -212,19 +212,15 @@ class Config implements PayUConfigInterface
      * @param string $group
      * @param string $field
      * @param string $environmentSuffix
-     * @param bool $decrypt
      *
      * @return string|null
      */
-    private function getGatewayConfig($group, $field, $environmentSuffix = '', $decrypt = false)
+    private function getGatewayConfig($group, $field, $environmentSuffix = '')
     {
         $value = $this->gatewayConfig->getValue(
             sprintf('%s%s/%1$s%s', $environmentSuffix, $group, $field),
             $this->storeId
         );
-        if ($decrypt) {
-            return $this->encryptor->decrypt($value);
-        }
 
         return $value;
     }
