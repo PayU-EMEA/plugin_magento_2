@@ -1,0 +1,257 @@
+.payu-block {
+    width: 100%;
+    text-align: center;
+}
+.payu-block__wrapper {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 452px;
+}
+.block-payu-cards .card .col {
+    vertical-align: middle;
+}
+.block-payu-cards .card__logo img {
+    max-height: 30px;
+}
+.block-payu-cards .card__action button[type="submit"] {
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    background: transparent;
+    border: 0;
+    font-weight: 400;
+    color: #1979c3;
+    font-size: 1.4rem;
+}
+.block-payu-cards .card__action button[type="submit"]:hover {
+    text-decoration: underline;
+}
+.payu-repay {
+    margin-bottom: 20px;
+}
+.payu-repay .repay__method:last-child {
+    border-bottom: 1px solid #cccccc;
+}
+.payu-repay .repay__method .payment-method-title {
+    padding: 20px 0;
+    border-top: 1px solid #cccccc;
+}
+.payu-repay .repay__method .payment-method-title label {
+    cursor: pointer;
+}
+.payu-repay .repay__method .payment-method-content {
+    padding: 0 0 20px;
+}
+.payu-repay .msg__repay {
+    margin-top: 10px;
+}
+.payment-loader {
+    display: none;
+}
+.payment-loader .loader {
+    background-image: url('../images/loader-1.gif');
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10006;
+    width: 64px;
+    height: 64px;
+}
+.checkout-index-index .payu-payment._active .payment-method-content,
+.sales-order-repayview .payu-payment._active .payment-method-content {
+    display: block;
+}
+.checkout-index-index .payu-payment__logo,
+.sales-order-repayview .payu-payment__logo {
+    max-height: 25px;
+    margin-bottom: -5px;
+}
+.checkout-index-index .payu-payment .payment-method-content,
+.sales-order-repayview .payu-payment .payment-method-content {
+    display: none;
+}
+.checkout-index-index .payu-payment .payment__method,
+.sales-order-repayview .payu-payment .payment__method {
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+.checkout-index-index .payu-payment .payment__method .method__single,
+.sales-order-repayview .payu-payment .payment__method .method__single {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 2px;
+    width: 100%;
+    height: 60px;
+    float: left;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content,
+.sales-order-repayview .payu-payment .payment__method .method__single--content {
+    width: 100%;
+    height: 100%;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content label,
+.sales-order-repayview .payu-payment .payment__method .method__single--content label {
+    display: block;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content img,
+.sales-order-repayview .payu-payment .payment__method .method__single--content img {
+    max-height: calc(100% - 18px);
+    max-width: calc(100% - 18px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content__image,
+.sales-order-repayview .payu-payment .payment__method .method__single--content__image {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.checkout-index-index .payu-payment .payment__method .method__single:nth-child(5n + 1),
+.sales-order-repayview .payu-payment .payment__method .method__single:nth-child(5n + 1) {
+    padding-left: 0;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--clear,
+.sales-order-repayview .payu-payment .payment__method .method__single--clear {
+    clear: both;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card,
+.sales-order-repayview .payu-payment .payment__method .payu-card,
+.checkout-index-index .payu-payment .payment__method .payu-pex,
+.sales-order-repayview .payu-payment .payment__method .payu-pex {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card__img-wrapper,
+.sales-order-repayview .payu-payment .payment__method .payu-card__img-wrapper,
+.checkout-index-index .payu-payment .payment__method .payu-pex__img-wrapper,
+.sales-order-repayview .payu-payment .payment__method .payu-pex__img-wrapper {
+    text-align: center;
+    min-width: 100px;
+    font-size: 0;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card__img-wrapper > *,
+.sales-order-repayview .payu-payment .payment__method .payu-card__img-wrapper > *,
+.checkout-index-index .payu-payment .payment__method .payu-pex__img-wrapper > *,
+.sales-order-repayview .payu-payment .payment__method .payu-pex__img-wrapper > * {
+    font-size: 1em;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card__info,
+.sales-order-repayview .payu-payment .payment__method .payu-card__info,
+.checkout-index-index .payu-payment .payment__method .payu-pex__info,
+.sales-order-repayview .payu-payment .payment__method .payu-pex__info {
+    list-style: none;
+    position: relative;
+    display: table;
+    box-sizing: border-box;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card__info > *,
+.sales-order-repayview .payu-payment .payment__method .payu-card__info > *,
+.checkout-index-index .payu-payment .payment__method .payu-pex__info > *,
+.sales-order-repayview .payu-payment .payment__method .payu-pex__info > * {
+    display: table-cell;
+    vertical-align: middle;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card__info span,
+.sales-order-repayview .payu-payment .payment__method .payu-card__info span,
+.checkout-index-index .payu-payment .payment__method .payu-pex__info span,
+.sales-order-repayview .payu-payment .payment__method .payu-pex__info span {
+    padding-left: 20px;
+}
+.checkout-index-index .payu-payment .payment__method .payu-card__info img,
+.sales-order-repayview .payu-payment .payment__method .payu-card__info img,
+.checkout-index-index .payu-payment .payment__method .payu-pex__info img,
+.sales-order-repayview .payu-payment .payment__method .payu-pex__info img {
+    max-height: 30px;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content,
+.sales-order-repayview .payu-payment .payment__method .method__single--content,
+.checkout-index-index .payu-payment .payment__method .payu-card,
+.sales-order-repayview .payu-payment .payment__method .payu-card,
+.checkout-index-index .payu-payment .payment__method .payu-pex,
+.sales-order-repayview .payu-payment .payment__method .payu-pex {
+    box-sizing: border-box;
+    padding: 7px;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content:not(._disabled),
+.sales-order-repayview .payu-payment .payment__method .method__single--content:not(._disabled),
+.checkout-index-index .payu-payment .payment__method .payu-card:not(._disabled),
+.sales-order-repayview .payu-payment .payment__method .payu-card:not(._disabled),
+.checkout-index-index .payu-payment .payment__method .payu-pex:not(._disabled),
+.sales-order-repayview .payu-payment .payment__method .payu-pex:not(._disabled) {
+    cursor: pointer;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content:not(._disabled):hover,
+.sales-order-repayview .payu-payment .payment__method .method__single--content:not(._disabled):hover,
+.checkout-index-index .payu-payment .payment__method .payu-card:not(._disabled):hover,
+.sales-order-repayview .payu-payment .payment__method .payu-card:not(._disabled):hover,
+.checkout-index-index .payu-payment .payment__method .payu-pex:not(._disabled):hover,
+.sales-order-repayview .payu-payment .payment__method .payu-pex:not(._disabled):hover {
+    background: rgba(220, 220, 220, 0.5);
+    border-color: grey;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content:not(._disabled):focus,
+.sales-order-repayview .payu-payment .payment__method .method__single--content:not(._disabled):focus,
+.checkout-index-index .payu-payment .payment__method .payu-card:not(._disabled):focus,
+.sales-order-repayview .payu-payment .payment__method .payu-card:not(._disabled):focus,
+.checkout-index-index .payu-payment .payment__method .payu-pex:not(._disabled):focus,
+.sales-order-repayview .payu-payment .payment__method .payu-pex:not(._disabled):focus {
+    border-color: darkgreen;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content:not(._disabled)._active,
+.sales-order-repayview .payu-payment .payment__method .method__single--content:not(._disabled)._active,
+.checkout-index-index .payu-payment .payment__method .payu-card:not(._disabled)._active,
+.sales-order-repayview .payu-payment .payment__method .payu-card:not(._disabled)._active,
+.checkout-index-index .payu-payment .payment__method .payu-pex:not(._disabled)._active,
+.sales-order-repayview .payu-payment .payment__method .payu-pex:not(._disabled)._active {
+    background: rgba(220, 220, 220, 0.5);
+    border-color: darkgreen;
+}
+.checkout-index-index .payu-payment .payment__method .method__single--content._disabled,
+.sales-order-repayview .payu-payment .payment__method .method__single--content._disabled,
+.checkout-index-index .payu-payment .payment__method .payu-card._disabled,
+.sales-order-repayview .payu-payment .payment__method .payu-card._disabled,
+.checkout-index-index .payu-payment .payment__method .payu-pex._disabled,
+.sales-order-repayview .payu-payment .payment__method .payu-pex._disabled {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    opacity: 0.5;
+    cursor: default;
+}
+.checkout-index-index .payu-payment .payment__payu-agreement .payu-agreement__wrapper,
+.sales-order-repayview .payu-payment .payment__payu-agreement .payu-agreement__wrapper {
+    margin-top: 20px;
+}
+.checkout-index-index .payu-payment .payment__payu-agreement .payu-agreement__wrapper > *,
+.sales-order-repayview .payu-payment .payment__payu-agreement .payu-agreement__wrapper > * {
+    margin-bottom: 10px;
+}
+.checkout-index-index .payu-payment .payment__payu-agreement .payu-agreement__wrapper .payu-text,
+.sales-order-repayview .payu-payment .payment__payu-agreement .payu-agreement__wrapper .payu-text {
+    font-size: 10px;
+}
+.checkout-index-index .actions-toolbar .action.primary,
+.sales-order-repayview .actions-toolbar .action.primary {
+    margin-top: 20px;
+}
+.checkout-index-index .payu-msg .msg__error,
+.sales-order-repayview .payu-msg .msg__error {
+    color: red;
+}
+
+@media all and (min-width: 768px), print {
+    .checkout-index-index .payu-payment .payment__method .method__single,
+    .sales-order-repayview .payu-payment .payment__method .method__single {
+        width: 16.66666667%;
+    }
+}
