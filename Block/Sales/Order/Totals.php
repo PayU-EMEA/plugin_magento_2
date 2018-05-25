@@ -14,9 +14,12 @@ class Totals extends SalesOrderTotals
      */
     protected function _beforeToHtml()
     {
-        $beforeToHtml = parent::_beforeToHtml();
-        unset($this->_totals['base_grandtotal']);
+        return parent::_beforeToHtml();
 
-        return $beforeToHtml;
+        //TODO: Remove total from e-mail only for MCP
+        //$beforeToHtml = parent::_beforeToHtml();
+        //unset($this->_totals['base_grandtotal']);
+
+        //return $beforeToHtml;
     }
 }
