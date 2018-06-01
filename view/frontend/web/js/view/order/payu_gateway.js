@@ -22,6 +22,7 @@ define(
                     defaults: {
                         template: 'PayU_PaymentGateway/order/payu_gateway',
                         agreementText: $t('You must accept the "Terms of a single PayU payment transaction"'),
+                        payuMethodText: $t('You must select pay method.'),
                         enabledStatus: 'ENABLED',
                         isChecked: repayModel.method,
                         payuMethod: ko.observable(false),

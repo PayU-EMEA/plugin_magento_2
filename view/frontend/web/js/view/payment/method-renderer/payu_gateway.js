@@ -28,6 +28,7 @@ define(
                         payuMethod: ko.observable(false),
                         payuAgreement: ko.observable(true),
                         agreementText: $t('You must accept the "Terms of a single PayU payment transaction"'),
+                        payuMethodText: $t('You must select pay method.'),
                         enabledStatus: 'ENABLED'
                     },
 
