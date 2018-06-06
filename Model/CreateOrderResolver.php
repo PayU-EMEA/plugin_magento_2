@@ -3,6 +3,7 @@
 namespace PayU\PaymentGateway\Model;
 
 use Magento\Framework\App\ProductMetadataInterface;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Framework\UrlInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Payment\Gateway\Data\OrderAdapterInterface;
@@ -79,6 +80,11 @@ class CreateOrderResolver implements CreateOrderResolverInterface
     private $store;
 
     /**
+     * @var RemoteAddress
+     */
+    private $remoteAddress;
+
+    /**
      * CreateOrderResolver constructor.
      *
      * @param UrlInterface $urlBuilder
@@ -91,6 +97,7 @@ class CreateOrderResolver implements CreateOrderResolverInterface
      * @param PayUConfigInterface $payUConfig
      * @param StoreManagerInterface $storeManager
      * @param ProductMetadataInterface $metadata
+     * @param RemoteAddress $remoteAddress
      */
     public function __construct(
         UrlInterface $urlBuilder,
@@ -102,7 +109,8 @@ class CreateOrderResolver implements CreateOrderResolverInterface
         PayUMcpExchangeRateResolverInterface $exchangeRateResolver,
         PayUConfigInterface $payUConfig,
         StoreManagerInterface $storeManager,
-        ProductMetadataInterface $metadata
+        ProductMetadataInterface $metadata,
+        RemoteAddress $remoteAddress
     ) {
         $this->urlBuilder = $urlBuilder;
         $this->availableLocale = $availableLocale;
@@ -114,6 +122,7 @@ class CreateOrderResolver implements CreateOrderResolverInterface
         $this->payUConfig = $payUConfig;
         $this->store = $storeManager->getStore();
         $this->metadata = $metadata;
+        $this->remoteAddress = $remoteAddress;
     }
 
     /**
@@ -128,11 +137,17 @@ class CreateOrderResolver implements CreateOrderResolverInterface
         $coninueUrl = 'checkout/onepage/success'
     ) {
         $this->order = $order;
+        $customerIp = $this->order->getRemoteIp();
+
+        if (empty($customerIp)) {
+            $customerIp = $this->remoteAddress->getRemoteAddress();
+        }
+
         $paymentData = [
             'txn_type' => 'A',
             'description' => $this->getOrderDescription(),
             'additionalDescription' => $this->getAdditionalDescription(),
-            'customerIp' => $this->order->getRemoteIp(),
+            'customerIp' => $customerIp,
             'extOrderId' => $this->getExtOrderId(),
             'totalAmount' => $this->getFormatAmount($this->order->getGrandTotalAmount()),
             'currencyCode' => $this->order->getCurrencyCode(),
