@@ -185,14 +185,6 @@ class Config implements PayUConfigInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getPluginVersion()
-    {
-        return static::PLUGIN_VERSION;
-    }
-
-    /**
      * Check if selected pay method is enable
      *
      * @param string $code

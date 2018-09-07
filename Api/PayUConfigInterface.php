@@ -239,11 +239,4 @@ interface PayUConfigInterface
      */
     public function isCrediCardCurrencyRates();
 
-    /**
-     * Get plugin version
-     *
-     * @return string
-     */
-    public function getPluginVersion();
-
 }
