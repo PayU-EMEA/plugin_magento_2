@@ -64,8 +64,9 @@ class GetNotify extends Action
     {
         $result = $this->resultFactory->create(ResultFactory::TYPE_RAW);
         try {
+            $type = $this->getType();
             $rawBody = $this->getRawBody();
-            $this->initPayUConfig();
+            $this->initPayUConfig($type);
             $order = $this->payUOrder;
             $payUResultData = $order::consumeNotification($rawBody);
             /** @var \stdClass $response */
@@ -76,6 +77,7 @@ class GetNotify extends Action
                     $orderRetrieved->status,
                     $orderRetrieved->orderId,
                     $orderRetrieved->totalAmount,
+                    $type,
                     $this->getPaymentId($response)
                 );
             }
@@ -124,19 +126,23 @@ class GetNotify extends Action
         return '';
     }
 
+    private function getType()
+    {
+        $type = trim(strip_tags($this->getRequest()->getParam('type', '')));
+
+        return ($type !== null && $type === PayUConfigInterface::PAYU_CC_TRANSFER_KEY) ? CardConfigProvider::CODE : ConfigProvider::CODE;
+    }
+
     /**
      * Initialize PayU configuration
      *
+     * @param string $type
+     *
      * @return void
      */
-    private function initPayUConfig()
+    private function initPayUConfig($type)
     {
-        $type = trim(strip_tags($this->getRequest()->getParam('type', '')));
         $store = (int)trim(strip_tags($this->getRequest()->getParam('store', '')));
-        $configType = ConfigProvider::CODE;
-        if ($type !== null && $type === PayUConfigInterface::PAYU_CC_TRANSFER_KEY) {
-            $configType = CardConfigProvider::CODE;
-        }
-        $this->payUConfig->setDefaultConfig($configType, $store);
+        $this->payUConfig->setDefaultConfig($type, $store);
     }
 }

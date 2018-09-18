@@ -239,4 +239,22 @@ interface PayUConfigInterface
      */
     public function isCrediCardCurrencyRates();
 
+    /**
+     * Get status after order place
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    public function getStatusAfterOrderPlace($code);
+
+    /**
+     * Get status after canceled notification
+     *
+     * @param string $code
+     *
+     * @return string
+     */
+    public function getStatusAfterCanceledNotification($code);
+
 }

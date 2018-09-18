@@ -22,6 +22,14 @@
                         <label>Payment Methods Order</label>
                         <comment><![CDATA[Enter payment methods values separated by comma. <a href="http://developers.payu.com/pl/overview.html#paymethods" target="_blank">List of payment methods</a>]]></comment>
                     </field>
+                    <field id="status_after_order_place" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Status After Order Place</label>
+                        <source_model>PayU\PaymentGateway\Model\Config\StatusesAfterOrderPlace</source_model>
+                    </field>
+                    <field id="status_after_canceled_notification" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Status After Canceled Notification</label>
+                        <source_model>PayU\PaymentGateway\Model\Config\StatusesAfterCanceledNotification</source_model>
+                    </field>
                 </group>
                 <group id="pos_parameters" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>POS parameters</label>
@@ -93,6 +101,14 @@
                     <field id="environment" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Sandbox mode</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="status_after_order_place" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Status After Order Place</label>
+                        <source_model>PayU\PaymentGateway\Model\Config\StatusesAfterOrderPlace</source_model>
+                    </field>
+                    <field id="status_after_canceled_notification" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Status After Canceled Notification</label>
+                        <source_model>PayU\PaymentGateway\Model\Config\StatusesAfterCanceledNotification</source_model>
                     </field>
                 </group>
                 <group id="pos_parameters" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">

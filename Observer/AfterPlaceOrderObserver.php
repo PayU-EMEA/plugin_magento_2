@@ -16,10 +16,21 @@ use Magento\Sales\Model\Order\Payment;
  */
 class AfterPlaceOrderObserver implements ObserverInterface
 {
+
     /**
      * Status pending
      */
     const STATUS_PENDING = 'pending';
+
+    /**
+     * Status pending_payment
+     */
+    const STATUS_PENDING_PAYMENT = 'pending_payment';
+
+    /**
+     * Allowed statuses after place order
+     */
+    const ALLOWED_STATUSES = array(self::STATUS_PENDING, self::STATUS_PENDING_PAYMENT);
 
     /**
      * Store key
@@ -69,7 +80,10 @@ class AfterPlaceOrderObserver implements ObserverInterface
         if ($method !== CardConfigProvider::CODE && $method !== ConfigProvider::CODE) {
             return;
         }
-        $this->assignStatus($payment);
+
+        $status = in_array($this->payUConfig->getStatusAfterOrderPlace($method), static::ALLOWED_STATUSES)
+            ? $this->payUConfig->getStatusAfterOrderPlace($method) : static::STATUS_PENDING;
+        $this->assignStatus($payment, $status);
         if ($this->payUConfig->isRepaymentActive($method)) {
             $this->emailProcessor->process($payment);
         }
@@ -77,13 +91,14 @@ class AfterPlaceOrderObserver implements ObserverInterface
 
     /**
      * @param Payment $payment
+     * @param string $status
      *
      * @return void
      */
-    private function assignStatus(Payment $payment)
+    private function assignStatus(Payment $payment, $status)
     {
         $order = $payment->getOrder();
-        $order->setState(static::STATUS_PENDING)->setStatus(static::STATUS_PENDING);
+        $order->setState($status)->setStatus($status);
         $this->orderRepository->save($order);
     }
 }

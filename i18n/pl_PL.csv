@@ -81,3 +81,6 @@
 "Shipping Method","Rodzaj dostawy"
 "Your %store_name repay order","Informacja o ponownej płatności w sklepie %store_name"
 "Remove card","Usuń kartę"
+"Status After Order Place", "Status po złożeniu zamówienia"
+"Status After Canceled Notification", "Status po przyjściu notyfikacji Canceled"
+"Without changing status", "Bez zmiany statusu"

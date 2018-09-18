@@ -7,6 +7,8 @@
                 <model>PayUPaymentGatewayFacade</model>
                 <payment_action>authorize</payment_action>
                 <title>PayU</title>
+                <status_after_order_place>pending</status_after_order_place>
+                <status_after_canceled_notification>canceled</status_after_canceled_notification>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
                 <can_void>0</can_void>
@@ -22,6 +24,8 @@
                 <model>PayUPaymentGatewayCardFacade</model>
                 <payment_action>authorize</payment_action>
                 <title>PayU - Cards</title>
+                <status_after_order_place>pending</status_after_order_place>
+                <status_after_canceled_notification>canceled</status_after_canceled_notification>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
                 <can_void>0</can_void>

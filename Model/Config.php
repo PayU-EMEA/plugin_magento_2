@@ -25,7 +25,7 @@ class Config implements PayUConfigInterface
     /**
      * Current Plugin Version
      */
-    const PLUGIN_VERSION = '1.2.4';
+    const PLUGIN_VERSION = '1.2.5-DEV';
 
     /**
      * @var \OpenPayU_Configuration
@@ -182,6 +182,27 @@ class Config implements PayUConfigInterface
         $this->setGatewayConfigCode(CardConfigProvider::CODE);
 
         return (bool)$this->gatewayConfig->getValue('currency_rates', $this->storeId);
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatusAfterOrderPlace($code)
+    {
+        $this->setGatewayConfigCode($code);
+
+        return $this->gatewayConfig->getValue('main_parameters/status_after_order_place', $this->storeId);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatusAfterCanceledNotification($code)
+    {
+        $this->setGatewayConfigCode($code);
+
+        return $this->gatewayConfig->getValue('main_parameters/status_after_canceled_notification', $this->storeId);
     }
 
     /**
