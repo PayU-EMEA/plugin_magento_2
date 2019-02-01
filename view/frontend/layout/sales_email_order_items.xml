@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Order Items List" design_abstraction="custom">
-    <update handle="sales_email_order_renderers"/>
-    <update handle="sales_email_item_price"/>
-    <body>
-        <referenceBlock class="PayU\PaymentGateway\Block\Sales\Order\Totals" name="order_totals" template="Magento_Sales::order/totals.phtml" />
-    </body>
-</page>
