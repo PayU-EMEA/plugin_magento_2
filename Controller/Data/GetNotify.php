@@ -68,7 +68,7 @@ class GetNotify extends Action implements CsrfAwareActionInterface
      *
      * @return InvalidRequestException|null
      */
-    public function createCsrfValidationException(RequestInterface $request) {
+    public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException {
         return null;
     }
 
@@ -80,7 +80,7 @@ class GetNotify extends Action implements CsrfAwareActionInterface
      *
      * @return bool|null
      */
-    public function validateForCsrf(RequestInterface $request) {
+    public function validateForCsrf(RequestInterface $request): ?bool {
         return true;
     }
 
