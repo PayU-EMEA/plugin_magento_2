@@ -6,6 +6,9 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Webapi\Exception;
+use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\Request\InvalidRequestException;
+use Magento\Framework\App\RequestInterface;
 use PayU\PaymentGateway\Api\PayUConfigInterface;
 use PayU\PaymentGateway\Model\Ui\CardConfigProvider;
 use PayU\PaymentGateway\Model\Ui\ConfigProvider;
@@ -14,7 +17,7 @@ use PayU\PaymentGateway\Model\Ui\ConfigProvider;
  * Class GetNotify
  * @package PayU\PaymentGateway\Controller\Data
  */
-class GetNotify extends Action
+class GetNotify extends Action implements CsrfAwareActionInterface
 {
     /**
      * @var \OpenPayU_Order
@@ -55,6 +58,30 @@ class GetNotify extends Action
         $this->notifyRefundProcessor = $notifyRefundProcessor;
         $this->payUOrder = $payUOrder;
         $this->payUConfig = $payUConfig;
+    }
+
+    /**
+     * Create exception in case CSRF validation failed.
+     * Return null if default exception will suffice.
+     *
+     * @param RequestInterface $request
+     *
+     * @return InvalidRequestException|null
+     */
+    public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException {
+        return null;
+    }
+
+    /**
+     * Perform custom request validation.
+     * Return null if default validation is needed.
+     *
+     * @param RequestInterface $request
+     *
+     * @return bool|null
+     */
+    public function validateForCsrf(RequestInterface $request): ?bool {
+        return true;
     }
 
     /**
