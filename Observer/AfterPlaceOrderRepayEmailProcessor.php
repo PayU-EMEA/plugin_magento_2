@@ -98,7 +98,7 @@ class AfterPlaceOrderRepayEmailProcessor
         $transport = $this->transportBuilder->setTemplateIdentifier('repay_email_template')->setTemplateOptions(
             [
                 'area' => Area::AREA_FRONTEND,
-                static::STORE => Store::DEFAULT_STORE_ID
+                static::STORE => $order->getStoreId()
             ]
         )->setTemplateVars($emailTempVariables)->setFrom($sender)->addTo(
             $order->getCustomerEmail()
