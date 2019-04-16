@@ -115,7 +115,7 @@ Dostępne gdy parametr `Tryb testowy (Sandbox)` jest ustawiony na `Tak`.
 ## Informacje o cechach
 
 ### Kolejność metod płatności
-W celu ustalenia kolejności wyświetlanych ikon matod płatności należy podać symbole metod płatności oddzielając je przecinkiem. [Lista metod płatności][ext6]. 
+W celu ustalenia kolejności wyświetlanych ikon matod płatności należy podać symbole metod płatności oddzielając je przecinkiem. [Lista metod płatności][ext6].
 
 ### Ponowienie płatności
 Aby użyć tej opcji, należy również odpowiednio skonfigurować POSa w PayU i wyłączyć automatycznie odbieranie płatności (domyślnie auto-odbiór jest włączony).
@@ -123,9 +123,9 @@ W tym celu należy zalogować się do panelu PayU, wejść do zakładki "Płatno
 Opcja "Automatyczny odbiór płatności" znajduje się na samym dole, pod listą metod płatności.
 
 Ponowienie płatności umożliwia zakładanie wielu płatności w PayU do jednego zamówienia w Magento. Wtyczka automatycznie odbierze pierwszą udaną płatność, a pozostałe zostaną anulowane.
-Ponowienie płatności z punktu widzenia kupującego jest możliwe poprzez listę zamówień w Magento (pojawi się tam link "Zapłać ponownie"). 
-Kupujący automatycznie otrzyma również wiadomość e-mail z takim linkiem. 
-Tym samym kupujący otrzymuje możliwość skutecznego opłacenia zamówienia, nawet jeśli pierwsza płatność była nieudana (np. brak środków na karcie, problemy z logowaniem do banku itp.). 
+Ponowienie płatności z punktu widzenia kupującego jest możliwe poprzez listę zamówień w Magento (pojawi się tam link "Zapłać ponownie").
+Kupujący automatycznie otrzyma również wiadomość e-mail z takim linkiem.
+Tym samym kupujący otrzymuje możliwość skutecznego opłacenia zamówienia, nawet jeśli pierwsza płatność była nieudana (np. brak środków na karcie, problemy z logowaniem do banku itp.).
 
 ### Zapisywanie kart
 Zapisywanie kart pozwala zalogowanym użytkownikom zapamiętać kartę na poczet przyszłych płatności.
@@ -133,19 +133,19 @@ Każda zapisana karta jest "tokenizowana", przy czym Magento w żaden sposób ni
 ani nie zapisuje w swojej bazie tokenów kartowych (przed użyciem, aktualne tokeny dla danego użytkownika są zawsze pobierane z PayU).
 
 W celu prawidłowego działania usługi konieczna jest dodatkowa konfiguracja w PayU, polegająca na umożliwieniu tworzenia i pobierania tokenów.
-Dodatkowo, można również ustalić zasady uwierzytelniania płatności zapisaną kartą (domyślnie każda płatność zapisaną karta wymaga podania kodu CVV i 
+Dodatkowo, można również ustalić zasady uwierzytelniania płatności zapisaną kartą (domyślnie każda płatność zapisaną karta wymaga podania kodu CVV i
 uwierzytelnieniu przez 3DS, ale można np. ustalić próg kwoty transakcji dla jakiego nie będzie to konieczne).
 
 Kupujący może zapisać kartę podczas płatności, korzystając z opcji "Użyj i zapisz" na widgecie PayU podczas podawania danych karty.
 Każda zapisywana karta podlega silnemu uwierzytelnieniu przy pierwszej płatności (CVV i 3DS).
-Zapisana karta będzie pokazywać się po wybraniu płatności kartą przez PayU za zamówienie i jest widoczna w koncie użytkownika 
+Zapisana karta będzie pokazywać się po wybraniu płatności kartą przez PayU za zamówienie i jest widoczna w koncie użytkownika
 (zakładka "Moje zapisane karty"), gdzie jest również dostępna opcja jej usunięcia.   
 
 ### Przewalutowanie
-Przewalutowanie, inaczej Multi-Currency Pricing (MCP), daje możliwość obciążania kart użytkowników w walucie innej niż waluta rozliczeniowa z PayU. Przykładowo, można obciażyć kartę w EUR, 
+Przewalutowanie, inaczej Multi-Currency Pricing (MCP), daje możliwość obciążania kart użytkowników w walucie innej niż waluta rozliczeniowa z PayU. Przykładowo, można obciażyć kartę w EUR,
 ale otrzymać PLN od PayU.
 Przewalutowanie opiera się o funkcjonalność Magento, która dla sklepu pozwala dla "store-view" zdefiniować "display currency" różną od "base currency".
-Ta opcja jest wygodniejsza dla kupującego niż DCC (Dynamic Currency Conversion), gdyż cena w walucie jego karty pokazana jest na poszczególnych produktach 
+Ta opcja jest wygodniejsza dla kupującego niż DCC (Dynamic Currency Conversion), gdyż cena w walucie jego karty pokazana jest na poszczególnych produktach
 i pozwala łatwiej podjąć decyzję o zakupie (w przypadku DCC kwota w walucie znana jest dopiero po rozpoczęciu płatności).
 W celu uruchomienia tej usługi należy:
 * uzyskać parametr mcpPartnerId z PayU (pozwala pobierać tabele kursowe z PayU z odpowiednimi parami walutowymi),
@@ -155,7 +155,7 @@ W celu uruchomienia i konfiguracji usługi należy skontaktować się z opiekune
 
 <!--external links:-->
 [ext0]: https://github.com/PayU/plugin_magento_160
-[ext1]: https://secure.payu.com/boarding/?pk_campaign=Plugin-Github&pk_kwd=Magento2#/form
+[ext1]: https://www.payu.pl/oferta-handlowa
 [ext2]: http://php.net/manual/en/book.curl.php
 [ext3]: http://php.net/manual/en/book.hash.php
 [ext4]: https://github.com/PayU/plugin_magento_2/releases/latest
