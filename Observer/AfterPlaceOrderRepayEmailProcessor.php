@@ -71,10 +71,14 @@ class AfterPlaceOrderRepayEmailProcessor
     public function process(Payment $payment)
     {
         $order = $payment->getOrder();
+
         $emailTempVariables = [
             'repay_url' => $this->urlBuilder->getUrl(
                 'sales/order/repayview',
-                ['order_id' => $payment->getOrder()->getId()]
+                [
+                    'order_id' => $order->getId(),
+                    'hash' => md5($order->getCustomerEmail() . $order->getId() . $order->getCreatedAt())
+                ]
             ),
             'order' => $order,
             static::STORE => $this->storeManager->getStore()
@@ -94,7 +98,7 @@ class AfterPlaceOrderRepayEmailProcessor
         $transport = $this->transportBuilder->setTemplateIdentifier('repay_email_template')->setTemplateOptions(
             [
                 'area' => Area::AREA_FRONTEND,
-                static::STORE => Store::DEFAULT_STORE_ID
+                static::STORE => $order->getStoreId()
             ]
         )->setTemplateVars($emailTempVariables)->setFrom($sender)->addTo(
             $order->getCustomerEmail()
