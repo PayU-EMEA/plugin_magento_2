@@ -118,7 +118,7 @@ class GetNotify extends Action
     {
         $body = file_get_contents('php://input');
         if (strlen(trim($body)) > 0) {
-            return $body;
+            return trim($body);
         }
 
         return '';
