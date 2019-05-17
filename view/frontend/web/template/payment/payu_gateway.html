@@ -13,6 +13,11 @@
         <!-- ko foreach: getRegion('messages') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
         <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
         <div class="field required">
             <div class="payment__method">
                 <div class="method__list" data-bind="visible: isPayuSelected(),
@@ -68,7 +73,9 @@
                         type="submit"
                         data-bind="
                         click: placeOrder,
-                        attr: {title: $t('Place Order'), disabled: !valid()}
+                        attr: {title: $t('Place Order')},
+                        enable: (getCode() == isChecked() && valid()),
+                        css: {disabled: !isPlaceOrderActionAllowed()}
                         ">
                     <span data-bind="i18n: 'Place Order'"></span>
                 </button>
