@@ -20,10 +20,10 @@
                                                                     <item name="component" xsi:type="string">PayU_PaymentGateway/js/view/payment/payu_gateway</item>
                                                                     <item name="methods" xsi:type="array">
                                                                         <item name="payu_gateway" xsi:type="array">
-                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">false</item>
+                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                         <item name="payu_gateway_card" xsi:type="array">
-                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">false</item>
+                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                     </item>
                                                                 </item>
