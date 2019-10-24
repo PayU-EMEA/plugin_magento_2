@@ -1,7 +1,7 @@
 # Moduł PayU dla Magento 2 w wersji >2.0.6, 2.1, 2.2
 ``Moduł jest wydawany na licencji GPL.``
 
-**Jeżeli masz jakiekolwiek pytania lub chcesz zgłosić błąd zapraszamy do kontaktu z naszym wsparciem pod adresem: tech@payu.pl.**
+**Jeżeli masz jakiekolwiek pytania lub chcesz zgłosić błąd zapraszamy do kontaktu z naszym [wsparciem technicznym][ext8].**
 
 * Jeżeli używasz Magneto w wersji 2.3 proszę skorzystać z [pluginu dla wersji 2.3 ][ext7]
 * Jeżeli używasz Magneto w wersji 1.x proszę skorzystać z [pluginu dla wersji 1.x][ext0]
@@ -162,6 +162,7 @@ W celu uruchomienia i konfiguracji usługi należy skontaktować się z opiekune
 [ext5]: https://secure.snd.payu.com/boarding/?pk_campaign=Plugin-Github&pk_kwd=Magento2#/form
 [ext6]: http://developers.payu.com/pl/overview.html#paymethods
 [ext7]: https://github.com/PayU/plugin_magento_23
+[ext8]: https://www.payu.pl/pomoc
 
 <!--images:-->
 [img0]: readme_images/methods.png
