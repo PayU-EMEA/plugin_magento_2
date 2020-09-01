@@ -3,7 +3,8 @@
 
 **Jeżeli masz jakiekolwiek pytania lub chcesz zgłosić błąd zapraszamy do kontaktu z naszym [wsparciem technicznym][ext8].**
 
-* Jeżeli używasz Magneto w wersji 2.3 proszę skorzystać z [pluginu dla wersji 2.3 ][ext7]
+* Jeżeli używasz Magneto w wersji 2.3 proszę skorzystać z [pluginu dla wersji 2.3][ext7]
+* Jeżeli używasz Magneto w wersji 2.4 proszę skorzystać z [pluginu dla wersji 2.4][ext9]
 * Jeżeli używasz Magneto w wersji 1.x proszę skorzystać z [pluginu dla wersji 1.x][ext0]
 
 ## Spis treści
@@ -163,6 +164,7 @@ W celu uruchomienia i konfiguracji usługi należy skontaktować się z opiekune
 [ext6]: http://developers.payu.com/pl/overview.html#paymethods
 [ext7]: https://github.com/PayU/plugin_magento_23
 [ext8]: https://www.payu.pl/pomoc
+[ext9]: https://github.com/PayU/plugin_magento_24
 
 <!--images:-->
 [img0]: readme_images/methods.png
