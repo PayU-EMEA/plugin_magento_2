@@ -155,16 +155,16 @@ W celu uruchomienia i konfiguracji usługi należy skontaktować się z opiekune
 
 
 <!--external links:-->
-[ext0]: https://github.com/PayU/plugin_magento_160
+[ext0]: https://github.com/PayU-EMEA/plugin_magento_160
 [ext1]: https://www.payu.pl/oferta-handlowa
 [ext2]: http://php.net/manual/en/book.curl.php
 [ext3]: http://php.net/manual/en/book.hash.php
-[ext4]: https://github.com/PayU/plugin_magento_2/releases/latest
+[ext4]: https://github.com/PayU-EMEA/plugin_magento_2/releases/latest
 [ext5]: https://secure.snd.payu.com/boarding/?pk_campaign=Plugin-Github&pk_kwd=Magento2#/form
 [ext6]: http://developers.payu.com/pl/overview.html#paymethods
-[ext7]: https://github.com/PayU/plugin_magento_23
+[ext7]: https://github.com/PayU-EMEA/plugin_magento_23
 [ext8]: https://www.payu.pl/pomoc
-[ext9]: https://github.com/PayU/plugin_magento_24
+[ext9]: https://github.com/PayU-EMEA/plugin_magento_24
 
 <!--images:-->
 [img0]: readme_images/methods.png
