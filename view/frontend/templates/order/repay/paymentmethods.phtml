@@ -38,6 +38,11 @@ $cardConfig = $this->getCardPaymentGatewayConfig();
 <?php endif;
 if (!empty($cardConfig)):
     ?>
+    <script type="text/javascript">
+        window.payuConfig = {
+            env: "<?php echo $this->getCardEnv(); ?>"
+        }
+    </script>
     <script type="text/x-magento-init">
     {
         "*": {

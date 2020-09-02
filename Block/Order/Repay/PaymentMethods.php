@@ -8,9 +8,9 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use PayU\PaymentGateway\Api\GetAvailableLocaleInterface;
 use PayU\PaymentGateway\Api\PayUConfigInterface;
+use PayU\PaymentGateway\Api\PayUGetCreditCardSecureFormConfigInterface;
 use PayU\PaymentGateway\Api\PayUGetPayMethodsInterface;
 use PayU\PaymentGateway\Api\PayUGetUserPayMethodsInterface;
-use PayU\PaymentGateway\Model\GetCreditCardWidgetConfig;
 use PayU\PaymentGateway\Model\Ui\CardConfigProvider;
 use PayU\PaymentGateway\Model\Ui\ConfigProvider;
 use Magento\Payment\Gateway\Config\Config as GatewayConfig;
@@ -39,7 +39,7 @@ class PaymentMethods extends Template
     /**
      * Locale
      */
-    const LOCALE = 'locale';
+    const LANGUAGE = 'language';
 
     /**
      * Terms URL
@@ -57,6 +57,16 @@ class PaymentMethods extends Template
     const REPAY_URL = 'repayUrl';
 
     /**
+     * Stored Cards List
+     */
+    const STORED_CARDS = 'storedCards';
+
+    /**
+     * Secure Form Config
+     */
+    const SECURE_FORM = 'secureForm';
+
+    /**
      * Repay address URL
      */
     const REPAY_URI = 'sales/order/repay';
@@ -70,11 +80,6 @@ class PaymentMethods extends Template
      * @var PayUGetPayMethodsInterface
      */
     private $payMethods;
-
-    /**
-     * @var GetCreditCardWidgetConfig
-     */
-    private $creditCardWidgetConfig;
 
     /**
      * @var OrderRepositoryInterface
@@ -111,9 +116,9 @@ class PaymentMethods extends Template
      *
      * @param Context $context
      * @param PayUGetPayMethodsInterface $payMethods
-     * @param GetCreditCardWidgetConfig $creditCardWidgetConfig
+     * @param PayUGetCreditCardSecureFormConfigInterface $secureFormConfig
      * @param OrderRepositoryInterface $orderRepository
-     * @param GetAvailableLocaleInterface $availableLocale '
+     * @param GetAvailableLocaleInterface $availableLocale
      * @param PayUGetUserPayMethodsInterface $userPayMethods
      * @param GatewayConfig $gatewayConfig
      * @param PayUConfigInterface $payUConfig
@@ -122,7 +127,7 @@ class PaymentMethods extends Template
     public function __construct(
         Context $context,
         PayUGetPayMethodsInterface $payMethods,
-        GetCreditCardWidgetConfig $creditCardWidgetConfig,
+        PayUGetCreditCardSecureFormConfigInterface $secureFormConfig,
         OrderRepositoryInterface $orderRepository,
         GetAvailableLocaleInterface $availableLocale,
         PayUGetUserPayMethodsInterface $userPayMethods,
@@ -131,7 +136,7 @@ class PaymentMethods extends Template
         array $data = []
     ) {
         $this->payMethods = $payMethods;
-        $this->creditCardWidgetConfig = $creditCardWidgetConfig;
+        $this->secureFormConfig = $secureFormConfig;
         $this->orderRepository = $orderRepository;
         $this->availableLocale = $availableLocale;
         $this->userPayMethods = $userPayMethods;
@@ -159,7 +164,7 @@ class PaymentMethods extends Template
                 static::CODE => ConfigProvider::CODE,
                 static::LOGO_SRC => $this->getViewFileUrl(PayUConfigInterface::PAYU_BANK_TRANSFER_LOGO_SRC),
                 static::ORDER_ID => $this->getOrder()->getEntityId(),
-                static::LOCALE => $this->availableLocale->execute(),
+                static::LANGUAGE => $this->availableLocale->execute(),
                 static::TERMS_URL => PayUConfigInterface::PAYU_TERMS_URL,
                 static::TRANSFER_KEY => PayUConfigInterface::PAYU_BANK_TRANSFER_KEY,
                 static::REPAY_URL => static::REPAY_URI,
@@ -178,28 +183,32 @@ class PaymentMethods extends Template
         $storeId = $this->_storeManager->getStore()->getId();
         $this->gatewayConfig->setMethodCode(CardConfigProvider::CODE);
         if (!(bool)$this->gatewayConfig->getValue(static::ACTIVE, $storeId)) {
-            return '';
+            return json_encode([]);
         }
-        $orderModel = $this->getOrder();
+
+        $userPayMethods = $this->getUserStoredCards();
 
         return json_encode(
             [
                 static::CODE => CardConfigProvider::CODE,
                 static::LOGO_SRC => $this->getViewFileUrl(PayUConfigInterface::PAYU_CC_TRANSFER_LOGO_SRC),
                 static::ORDER_ID => $this->getOrder()->getEntityId(),
-                static::LOCALE => $this->availableLocale->execute(),
+                static::LANGUAGE => $this->availableLocale->execute(),
                 static::TERMS_URL => PayUConfigInterface::PAYU_TERMS_URL,
                 static::TRANSFER_KEY => PayUConfigInterface::PAYU_CC_TRANSFER_KEY,
                 static::REPAY_URL => static::REPAY_URI,
-                'customerEmail' => $this->getOrder()->getCustomerEmail(),
-                'stored' => ['list' => $this->getUserStoredCards()],
-                'widgetConfig' => $this->creditCardWidgetConfig->execute(
-                    $orderModel->getCustomerEmail(),
-                    $orderModel->getGrandTotal(),
-                    $orderModel->getOrderCurrencyCode()
-                )
+                static::STORED_CARDS => array_key_exists(PayUGetUserPayMethodsInterface::CARD_TOKENS, $userPayMethods) && $userPayMethods[PayUGetUserPayMethodsInterface::CARD_TOKENS] ? $userPayMethods[PayUGetUserPayMethodsInterface::CARD_TOKENS] : [],
+                static::SECURE_FORM => $this->secureFormConfig->execute()
             ]
         );
+    }
+    /**
+     *
+     * @return string
+     */
+    public function getCardEnv()
+    {
+        return $this->secureFormConfig->execute()[PayUGetCreditCardSecureFormConfigInterface::CONFIG_ENV];
     }
 
     /**

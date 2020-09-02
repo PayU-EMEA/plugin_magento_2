@@ -1,0 +1,24 @@
+<div class="payu-card-cvv-form-container" afterRender="renderSecureForm">
+    <div class="payu-card-cvv-container">
+        <div class="payu-card-form" id="payu-card-cvv"></div>
+    </div>
+</div>
+<!-- ko if: secureFormError() -->
+<div class="payu-msg">
+    <p class="msg msg__error"><!-- ko i18n: 'An error occurred while trying to send CVV' --><!-- /ko -->:</p>
+    <p class="msg msg__error" data-bind="html: secureFormError"></p>
+</div>
+<!-- /ko -->
+<div class="actions-toolbar">
+    <div class="primary">
+        <button class="action primary checkout"
+                type="submit"
+                data-bind="
+                click: saveCvv,
+                attr: {title: $t('Send CVV')},
+                enable: !isPending()"
+                disabled>
+            <span data-bind="i18n: 'Send CVV'"></span>
+        </button>
+    </div>
+</div>

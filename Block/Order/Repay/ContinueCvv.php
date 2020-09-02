@@ -53,30 +53,23 @@ class ContinueCvv extends Template
     {
         $cvv = $this->customerSession->getCvvUrl();
         $this->customerSession->setCvvUrl(null);
-        $orderId = (int)$this->getRequest()->getParam('order_id');
         if ($cvv !== null) {
-            $widgetConfig = $this->cardWidgetCVVConfig->execute($cvv, $orderId);
-            $jsonDecodeWidget = json_decode($widgetConfig, true);
-            array_walk(
-                $jsonDecodeWidget,
-                function (&$item, $value) {
-                    $item = sprintf('%s="%s"', $value, $item);
-                }
-            );
-
-            return implode(' ', $jsonDecodeWidget);
+            $secureFormCvvConfig = $this->cardWidgetCVVConfig->execute($cvv);
+            $secureFormCvvConfig['redirectUri'] = $this->getUrl('sales/order/history');
+            return json_encode($secureFormCvvConfig);
         }
 
-        return null;
+        return json_encode([]);
+
     }
 
     /**
-     * Return redirect url after success cvv action
      *
      * @return string
      */
-    public function getRedirectUrl()
+    public function getEnv()
     {
-        return $this->getUrl('sales/order/history');
+        return $this->cardWidgetCVVConfig->execute('')[PayUGetCreditCardCVVWidgetConfigInterface::CONFIG_ENV];
     }
+
 }

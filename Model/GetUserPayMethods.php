@@ -101,10 +101,9 @@ class GetUserPayMethods implements PayUGetUserPayMethodsInterface
             );
             $payURetrieve = $this->openPayURetrieve;
             $response = $payURetrieve::payMethods($this->availableLocale->execute())->getResponse();
-            if (isset($response->cardTokens) && isset($response->pexTokens)) {
+            if (isset($response->cardTokens)) {
                 $this->result = [
-                    static::CARD_TOKENS => $response->cardTokens,
-                    static::PEX_TOKENS => $response->pexTokens
+                    static::CARD_TOKENS => $response->cardTokens
                 ];
             }
         } catch (\OpenPayU_Exception $exception) {

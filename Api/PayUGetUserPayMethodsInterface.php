@@ -14,11 +14,6 @@ interface PayUGetUserPayMethodsInterface
     const CARD_TOKENS = 'cardTokens';
 
     /**
-     * Pex Tokens code
-     */
-    const PEX_TOKENS = 'pexTokens';
-
-    /**
      * Get user payment methods from PayU REST API
      *
      * @param string|null $email

@@ -46,21 +46,6 @@
 .payu-repay .msg__repay {
     margin-top: 10px;
 }
-.payment-loader {
-    display: none;
-}
-.payment-loader .loader {
-    background-image: url('../images/loader-1.gif');
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 10006;
-    width: 64px;
-    height: 64px;
-}
 .payu-payment._active .payment-method-content {
     display: block;
 }
@@ -112,44 +97,36 @@
 .payu-payment .payment__method .method__single--clear {
     clear: both;
 }
-.payu-payment .payment__method .payu-card,
-.payu-payment .payment__method .payu-pex {
+.payu-payment .payment__method .payu-card {
     margin-bottom: 10px;
     cursor: pointer;
 }
-.payu-payment .payment__method .payu-card__img-wrapper,
-.payu-payment .payment__method .payu-pex__img-wrapper {
+.payu-payment .payment__method .payu-card__img-wrapper {
     text-align: center;
     min-width: 100px;
     font-size: 0;
 }
-.payu-payment .payment__method .payu-card__img-wrapper > *,
-.payu-payment .payment__method .payu-pex__img-wrapper > * {
+.payu-payment .payment__method .payu-card__img-wrapper > * {
     font-size: 1em;
 }
-.payu-payment .payment__method .payu-card__info,
-.payu-payment .payment__method .payu-pex__info {
+.payu-payment .payment__method .payu-card__info {
     list-style: none;
     position: relative;
     display: table;
     box-sizing: border-box;
 }
-.payu-payment .payment__method .payu-card__info > *,
-.payu-payment .payment__method .payu-pex__info > * {
+.payu-payment .payment__method .payu-card__info > * {
     display: table-cell;
     vertical-align: middle;
 }
-.payu-payment .payment__method .payu-card__info span,
-.payu-payment .payment__method .payu-pex__info span {
+.payu-payment .payment__method .payu-card__info span {
     padding-left: 20px;
 }
-.payu-payment .payment__method .payu-card__info img,
-.payu-payment .payment__method .payu-pex__info img {
+.payu-payment .payment__method .payu-card__info img {
     max-height: 30px;
 }
 .payu-payment .payment__method .method__single--content,
-.payu-payment .payment__method .payu-card,
-.payu-payment .payment__method .payu-pex {
+.payu-payment .payment__method .payu-card {
     box-sizing: border-box;
     padding: 7px;
     border: 1px solid #dcdcdc;
@@ -157,31 +134,26 @@
 }
 
 .payu-payment .payment__method .method__single--content:not(._disabled),
-.payu-payment .payment__method .payu-card:not(._disabled),
-.payu-payment .payment__method .payu-pex:not(._disabled) {
+.payu-payment .payment__method .payu-card:not(._disabled) {
     cursor: pointer;
 }
 
 .payu-payment .payment__method .method__single--content:not(._disabled):hover,
-.payu-payment .payment__method .payu-card:not(._disabled):hover,
-.payu-payment .payment__method .payu-pex:not(._disabled):hover {
+.payu-payment .payment__method .payu-card:not(._disabled):hover {
     background: rgba(220, 220, 220, 0.5);
     border-color: grey;
 }
 .payu-payment .payment__method .method__single--content:not(._disabled):focus,
-.payu-payment .payment__method .payu-card:not(._disabled):focus,
-.payu-payment .payment__method .payu-pex:not(._disabled):focus {
+.payu-payment .payment__method .payu-card:not(._disabled):focus {
     border-color: darkgreen;
 }
 .payu-payment .payment__method .method__single--content:not(._disabled)._active,
-.payu-payment .payment__method .payu-card:not(._disabled)._active,
-.payu-payment .payment__method .payu-pex:not(._disabled)._active {
+.payu-payment .payment__method .payu-card:not(._disabled)._active {
     background: rgba(220, 220, 220, 0.5);
     border-color: darkgreen;
 }
 .payu-payment .payment__method .method__single--content._disabled,
-.payu-payment .payment__method .payu-card._disabled,
-.payu-payment .payment__method .payu-pex._disabled {
+.payu-payment .payment__method .payu-card._disabled {
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
     opacity: 0.5;
@@ -193,7 +165,7 @@
 .payu-payment .payment__payu-agreement .payu-agreement__wrapper > * {
     margin-bottom: 10px;
 }
-.payu-payment .payment__payu-agreement .payu-agreement__wrapper .payu-text {
+.payu-payment .payu-text {
     font-size: 10px;
 }
 .checkout-index-index .actions-toolbar .action.primary,
@@ -204,8 +176,93 @@
     color: red;
 }
 
+.payu-card-form-container {
+    width: 380px;
+    margin: 25px auto 15px;
+}
+
+
+.payu-card-cvv-form-container {
+    width: 200px;
+    margin: 25px auto 15px;
+}
+
+.payu-card-form-container .payu-card-container,
+.payu-card-cvv-form-container .payu-card-cvv-container {
+    margin: 0 auto;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 15px 10px;
+    border: 1px solid #428f29;
+    background: rgba(66, 143, 41, 1);
+    background: linear-gradient(135deg, rgba(53, 112, 33, 1) 0%, rgba(66, 143, 41, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#357021', endColorstr='#428f29', GradientType=1);
+}
+
+.payu-card-form-container .payu-card-container div.aside {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.payu-card-form-container .payu-card-form,
+.payu-card-cvv-form-container .payu-card-form {
+    margin: 0 auto 0 auto;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.payu-card-form-container .card-details .expiration {
+    width: 50%;
+    float: left;
+}
+.payu-card-form-container .card-details .cvv {
+    width: 45%;
+    float: right;
+}
+.payu-card-form-container .clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.payu-card-form-container .clearfix:after { clear: both; }
+
+.payu-card-form-container .clearfix {
+    margin-top: 10px;
+}
+
+.payu-card-form-container .payu-card-legend-container {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    overflow: auto
+}
+.payu-card-form-container .payu-card-legend-container > div {
+    float: left;
+}
+.payu-card-form-container .payu-card-legend-container > .payu-card-legend-number {
+    width: 220px;
+    margin-left: 45px
+}
+.payu-card-form-container .payu-card-legend-container > .payu-card-legend-valid {
+    width: 85px
+}
+.payu-store-card {
+    margin: 15px 0;
+}
+.payu-read-more {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 @media all and (min-width: 768px), print {
     .payu-payment .payment__method .method__single {
         width: 16.66666667%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .payu-card-form-container {
+        width: 100%;
     }
 }

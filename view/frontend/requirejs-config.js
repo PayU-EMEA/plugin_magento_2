@@ -1,12 +1,14 @@
 var config = {
     map: {
         '*': {
+            payuSDKSandbox:     'https://secure.snd.payu.com/javascript/sdk',
+            payuSDK:            'https://secure.payu.com/javascript/sdk',
+            es6Promise:         'PayU_PaymentGateway/js/es6_promise',
             gatewayMethods:     'PayU_PaymentGateway/js/model/gateway_methods',
             gatewayCardMethods: 'PayU_PaymentGateway/js/model/gateway_card_methods',
-            paymentExtended:    'PayU_PaymentGateway/js/model/payment_extended',
+            paymentCardExtended:'PayU_PaymentGateway/js/model/payment_card_extended',
+            paymentPblExtended: 'PayU_PaymentGateway/js/model/payment_pbl_extended',
             repayExtended:      'PayU_PaymentGateway/js/model/repay_extended',
-            tokenHandler:       'PayU_PaymentGateway/js/tokenHandler',
-            toArray:            'PayU_PaymentGateway/js/utils/to_array',
             repay:              'PayU_PaymentGateway/js/model/repay'
         }
     }

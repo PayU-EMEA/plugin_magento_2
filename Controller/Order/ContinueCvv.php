@@ -51,7 +51,7 @@ class ContinueCvv extends View
             $orderId = (int)$this->getRequest()->getParam(static::ORDER_ID);
 
             return $this->resultRedirectFactory->create()->setPath(
-                'sales/order/repaywiev',
+                'sales/order/repayview',
                 [static::ORDER_ID => $orderId]
             );
         }

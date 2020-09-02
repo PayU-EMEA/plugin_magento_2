@@ -101,7 +101,13 @@ class GetPayMethods implements PayUGetPayMethodsInterface
             $this->result = [];
         }
 
-        return $this->result;
+        $paymethods = [];
+
+        foreach ($this->result as $paymethod) {
+            $paymethods[] = $paymethod;
+        }
+
+        return $paymethods;
     }
 
     /**

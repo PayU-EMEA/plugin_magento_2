@@ -55,16 +55,12 @@ class StoredCards extends Template
         try {
             $this->gatewayConfig->setMethodCode(CardConfigProvider::CODE);
             $result = $this->userPayMethods->execute();
-            if (array_key_exists(PayUGetUserPayMethodsInterface::CARD_TOKENS, $result) &&
-                array_key_exists(PayUGetUserPayMethodsInterface::PEX_TOKENS, $result)) {
+            if (array_key_exists(PayUGetUserPayMethodsInterface::CARD_TOKENS, $result)) {
                 if (!$result[PayUGetUserPayMethodsInterface::CARD_TOKENS]) {
                     $result[PayUGetUserPayMethodsInterface::CARD_TOKENS] = [];
                 }
-                if (!$result[PayUGetUserPayMethodsInterface::PEX_TOKENS]) {
-                    $result[PayUGetUserPayMethodsInterface::PEX_TOKENS] = [];
-                }
 
-                return array_merge($result['cardTokens'], $result['pexTokens']);
+                return $result['cardTokens'];
             }
 
             return [];

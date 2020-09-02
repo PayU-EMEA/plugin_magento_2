@@ -3,13 +3,12 @@
 namespace PayU\PaymentGateway\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
+use Magento\Framework\Locale\ResolverInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use PayU\PaymentGateway\Api\PayUConfigInterface;
-use PayU\PaymentGateway\Api\GetAvailableLocaleInterface;
 use PayU\PaymentGateway\Api\PayUGetPayMethodsInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Magento\Payment\Gateway\Config\Config as GatewayConfig;
-use Magento\Framework\Json\EncoderInterface;
 
 /**
  * Class ConfigProvider
@@ -44,14 +43,9 @@ class ConfigProvider implements ConfigProviderInterface
     private $storeId;
 
     /**
-     * @var GetAvailableLocaleInterface
+     * @var ResolverInterface
      */
-    private $availableLocale;
-
-    /**
-     * @var EncoderInterface
-     */
-    private $encoder;
+    private $resolver;
 
     /**
      * @var PayUConfigInterface
@@ -65,26 +59,23 @@ class ConfigProvider implements ConfigProviderInterface
      * @param AssetRepository $assetRepository
      * @param GatewayConfig $gatewayConfig
      * @param StoreManagerInterface $storeManager
-     * @param GetAvailableLocaleInterface $availableLocale
-     * @param EncoderInterface $encoder
      * @param PayUConfigInterface $payUConfig
+     * @param ResolverInterface $resolver
      */
     public function __construct(
         PayUGetPayMethodsInterface $payMethods,
         AssetRepository $assetRepository,
         GatewayConfig $gatewayConfig,
         StoreManagerInterface $storeManager,
-        GetAvailableLocaleInterface $availableLocale,
-        EncoderInterface $encoder,
-        PayUConfigInterface $payUConfig
+        PayUConfigInterface $payUConfig,
+        ResolverInterface $resolver
     ) {
         $this->payMethods = $payMethods;
         $this->assetRepository = $assetRepository;
         $this->gatewayConfig = $gatewayConfig;
         $this->storeId = $storeManager->getStore()->getId();
-        $this->availableLocale = $availableLocale;
-        $this->encoder = $encoder;
         $this->payUConfig = $payUConfig;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -103,11 +94,16 @@ class ConfigProvider implements ConfigProviderInterface
                     'isActive' => $isActive,
                     'logoSrc' => $this->assetRepository->getUrl(PayUConfigInterface::PAYU_BANK_TRANSFER_LOGO_SRC),
                     'termsUrl' => PayUConfigInterface::PAYU_TERMS_URL,
-                    'payByLinks' => $this->encoder->encode($this->payMethods->execute()),
+                    'payByLinks' => $this->payMethods->execute(),
                     'transferKey' => PayUConfigInterface::PAYU_BANK_TRANSFER_KEY,
-                    'locale' => $this->availableLocale->execute()
+                    'language' => $this->getLanguage()
                 ]
             ]
         ];
+    }
+
+    private function getLanguage()
+    {
+        return current(explode('_', $this->resolver->getLocale()));
     }
 }

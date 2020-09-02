@@ -3,7 +3,7 @@
 namespace PayU\PaymentGateway\Api;
 
 /**
- * Interface PayUGetCreditCardWidgetConfig
+ * Interface GetAvailableLocaleInterface
  * @package PayU\PaymentGateway\Api
  */
 interface GetAvailableLocaleInterface

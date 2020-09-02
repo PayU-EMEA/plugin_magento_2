@@ -3,13 +3,13 @@
 namespace PayU\PaymentGateway\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
+use Magento\Framework\Locale\ResolverInterface;
+use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use PayU\PaymentGateway\Api\PayUConfigInterface;
-use PayU\PaymentGateway\Api\GetAvailableLocaleInterface;
-use PayU\PaymentGateway\Api\PayUGetCreditCardWidgetConfigInterface;
+use PayU\PaymentGateway\Api\PayUGetCreditCardSecureFormConfigInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Magento\Payment\Gateway\Config\Config as GatewayConfig;
-use Magento\Framework\Json\EncoderInterface;
 use PayU\PaymentGateway\Api\PayUGetUserPayMethodsInterface;
 
 /**
@@ -25,9 +25,9 @@ class CardConfigProvider implements ConfigProviderInterface
     const CODE = 'payu_gateway_card';
 
     /**
-     * @var PayUGetCreditCardWidgetConfigInterface
+     * @var PayUGetCreditCardSecureFormConfigInterface
      */
-    private $cardWidgetConfig;
+    private $secureFormConfig;
 
     /**
      * @var AssetRepository
@@ -45,47 +45,47 @@ class CardConfigProvider implements ConfigProviderInterface
     private $storeId;
 
     /**
-     * @var GetAvailableLocaleInterface
-     */
-    private $availableLocale;
-
-    /**
      * @var PayUGetUserPayMethodsInterface
      */
     private $userPayMethods;
 
     /**
-     * @var EncoderInterface
+     * @var ResolverInterface
      */
-    private $encoder;
+    private $resolver;
+
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
 
     /**
      * CardConfigProvider constructor.
      *
-     * @param PayUGetCreditCardWidgetConfigInterface $cardConfig
+     * @param PayUGetCreditCardSecureFormConfigInterface $secureFormConfig
      * @param AssetRepository $assetRepository
      * @param GatewayConfig $gatewayConfig
      * @param StoreManagerInterface $storeManager
-     * @param GetAvailableLocaleInterface $availableLocale
      * @param PayUGetUserPayMethodsInterface $userPayMethods
-     * @param EncoderInterface $encoder
+     * @param SerializerInterface $serializer
+     * @param ResolverInterface $resolver
      */
     public function __construct(
-        PayUGetCreditCardWidgetConfigInterface $cardConfig,
+        PayUGetCreditCardSecureFormConfigInterface $secureFormConfig,
         AssetRepository $assetRepository,
         GatewayConfig $gatewayConfig,
         StoreManagerInterface $storeManager,
-        GetAvailableLocaleInterface $availableLocale,
         PayUGetUserPayMethodsInterface $userPayMethods,
-        EncoderInterface $encoder
+        SerializerInterface $serializer,
+        ResolverInterface $resolver
     ) {
-        $this->cardWidgetConfig = $cardConfig;
+        $this->secureFormConfig = $secureFormConfig;
         $this->assetRepository = $assetRepository;
         $this->gatewayConfig = $gatewayConfig;
         $this->storeId = $storeManager->getStore()->getId();
-        $this->availableLocale = $availableLocale;
         $this->userPayMethods = $userPayMethods;
-        $this->encoder = $encoder;
+        $this->serializer = $serializer;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -95,18 +95,25 @@ class CardConfigProvider implements ConfigProviderInterface
     {
         $this->gatewayConfig->setMethodCode(self::CODE);
 
+        $userPayMethods = $this->userPayMethods->execute();
+
         return [
             'payment' => [
                 'payuGatewayCard' => [
                     'isActive' => (bool)$this->gatewayConfig->getValue('main_parameters/active', $this->storeId),
                     'logoSrc' => $this->assetRepository->getUrl(PayUConfigInterface::PAYU_CC_TRANSFER_LOGO_SRC),
-                    'ccWidgetConfig' => $this->encoder->encode($this->cardWidgetConfig->execute()),
-                    'storedCards' => $this->encoder->encode($this->userPayMethods->execute()),
+                    'secureFormConfig' => $this->secureFormConfig->execute(),
+                    'storedCards' => array_key_exists(PayUGetUserPayMethodsInterface::CARD_TOKENS, $userPayMethods) && $userPayMethods[PayUGetUserPayMethodsInterface::CARD_TOKENS] ? $userPayMethods[PayUGetUserPayMethodsInterface::CARD_TOKENS] : [],
                     'transferKey' => PayUConfigInterface::PAYU_CC_TRANSFER_KEY,
                     'termsUrl' => PayUConfigInterface::PAYU_TERMS_URL,
-                    'locale' => $this->availableLocale->execute()
+                    'language' => $this->getLanguage()
                 ]
             ]
         ];
+    }
+
+    private function getLanguage()
+    {
+        return current(explode('_', $this->resolver->getLocale()));
     }
 }

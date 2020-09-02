@@ -4,64 +4,54 @@ define(
     [
         'jquery',
         'repayExtended',
-        'gatewayMethods',
         'mage/url',
         'ko',
         'mage/translate',
-        'repay',
-        'toArray'
+        'repay'
     ],
-    function ($, Component, gatewayMethods, url, ko, $t, repayModel, toArray) {
+    function (
+        $,
+        Component,
+        url,
+        ko,
+        $t,
+        repayModel
+    ) {
         'use strict';
 
         return Component.extend(
-            $.extend(
-                {},
-                gatewayMethods,
-                {
-                    defaults: {
-                        template: 'PayU_PaymentGateway/order/payu_gateway',
-                        agreementText: $t('You must accept the "Terms of a single PayU payment transaction"'),
-                        payuMethodText: $t('You must select pay method.'),
-                        enabledStatus: 'ENABLED',
-                        isChecked: repayModel.method,
-                        payuMethod: ko.observable(false),
-                        payuAgreement: ko.observable(true)
-                    },
+            {
+                defaults: {
+                    template: 'PayU_PaymentGateway/order/payu_gateway',
+                    enabledStatus: 'ENABLED',
+                    isChecked: repayModel.method,
+                    payuMethod: ko.observable(null),
+                    payuAgreement: ko.observable(true),
+                    payuMore1: ko.observable(false),
+                    payuMore2: ko.observable(false)
+                },
 
-                    /**
-                     * @return {exports}
-                     */
-                    initialize: function () {
-                        var that = this;
+                /**
+                 * @return {exports}
+                 */
+                initialize: function () {
+                    this._super();
 
-                        this._super();
+                    return this;
+                },
 
-                        this.methods = toArray(this.methods).slice();
-
-                        this.isPayuSelected = ko.computed(function () {
-                            return that.getCode() === repayModel.method();
-                        });
-
-                        this.setValidProp();
-                        this.setSelectedSubscription();
-
-                        return this;
-                    },
-
-                    /**
-                     * @return {Object}
-                     */
-                    getData: function () {
-                        return {
-                            'method': this.getCode(),
-                            'payu_method': this.payuMethod(),
-                            'payu_method_type': this.transferKey,
-                            'order_id': this.orderId
-                        };
-                    }
+                /**
+                 * @return {Object}
+                 */
+                getData: function () {
+                    return {
+                        'method': this.getCode(),
+                        'payu_method': this.payuMethod(),
+                        'payu_method_type': this.transferKey,
+                        'order_id': this.orderId
+                    };
                 }
-            )
+            }
         );
     }
 );

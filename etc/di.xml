@@ -4,7 +4,7 @@
     <preference for="PayU\PaymentGateway\Api\PayUGetPayMethodsInterface" type="PayU\PaymentGateway\Model\GetPayMethods" />
     <preference for="PayU\PaymentGateway\Api\PayUGetUserPayMethodsInterface" type="PayU\PaymentGateway\Model\GetUserPayMethods" />
     <preference for="PayU\PaymentGateway\Api\PayUCacheConfigInterface" type="PayU\PaymentGateway\Model\CacheConfig" />
-    <preference for="PayU\PaymentGateway\Api\PayUGetCreditCardWidgetConfigInterface" type="PayU\PaymentGateway\Model\GetCreditCardWidgetConfig" />
+    <preference for="PayU\PaymentGateway\Api\PayUGetCreditCardSecureFormConfigInterface" type="PayU\PaymentGateway\Model\GetCreditCardSecureFormConfig" />
     <preference for="PayU\PaymentGateway\Api\PayUGetCreditCardCVVWidgetConfigInterface" type="PayU\PaymentGateway\Model\GetCreditCardCVVWidgetConfig" />
     <preference for="PayU\PaymentGateway\Api\GetAvailableLocaleInterface" type="PayU\PaymentGateway\Model\GetAvailableLocale" />
     <preference for="PayU\PaymentGateway\Api\PayUCreateOrderInterface" type="PayU\PaymentGateway\Model\CreateOrder" />

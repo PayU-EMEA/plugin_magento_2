@@ -1,139 +1,113 @@
 /*browser:true*/
 /*global define*/
+var payuSDK = window.checkoutConfig.payment.payuGatewayCard.secureFormConfig.env === 'sandbox' ? 'payuSDKSandbox' : 'payuSDK';
 define(
     [
         'jquery',
-        'paymentExtended',
-        'gatewayCardMethods',
+        'paymentCardExtended',
         'mage/url',
         'ko',
-        'mage/translate',
-        'Magento_Checkout/js/model/quote',
-        'toArray'
+        payuSDK
     ],
-    function ($, Component, gatewayCardMethods, url, ko, $t, quote, toArray) {
+    function (
+        $,
+        Component,
+        url,
+        ko
+    ) {
         'use strict';
 
         return Component.extend(
-            $.extend(
-                {},
-                gatewayCardMethods,
-                {
-                    defaults: {
-                        template: 'PayU_PaymentGateway/payment/payu_gateway_card',
-                        postPlaceOrderData: 'payu/data/getPostPlaceOrderData',
-                        sigUrl: 'payu/data/getCardWidgetConfig',
-                        logoSrc: window.checkoutConfig.payment.payuGatewayCard.logoSrc,
-                        termsUrl: window.checkoutConfig.payment.payuGatewayCard.termsUrl,
-                        transferKey: window.checkoutConfig.payment.payuGatewayCard.transferKey,
-                        locale: window.checkoutConfig.payment.payuGateway.locale,
-                        payuMethod: ko.observable(null),
-                        payuWidget: {
-                            config: JSON.parse(window.checkoutConfig.payment.payuGatewayCard.ccWidgetConfig),
-                            showWarning: ko.observable(false),
-                            cardValue: ko.observable(null),
-                            cardType: ko.observable(null),
-                            cardData: ko.observable(null)
-                        },
-                        payuAgreement: ko.observable(true),
-                        agreementText: $t('You must accept the "Terms of a single PayU payment transaction"'),
-                        payuScriptHtml: ko.observable(''),
-                        payuCCVScriptHtml: ko.observable(''),
-                        useNewCard: ko.observable(false),
-                        stored: {
-                            list: JSON.parse(window.checkoutConfig.payment.payuGatewayCard.storedCards),
-                            activeStatus: 'ACTIVE'
-                        }
+            {
+                defaults: {
+                    template: 'PayU_PaymentGateway/payment/payu_gateway_card',
+                    postPlaceOrderData: 'payu/data/getPostPlaceOrderData',
+                    logoSrc: window.checkoutConfig.payment.payuGatewayCard.logoSrc,
+                    termsUrl: window.checkoutConfig.payment.payuGatewayCard.termsUrl,
+                    transferKey: window.checkoutConfig.payment.payuGatewayCard.transferKey,
+                    language: window.checkoutConfig.payment.payuGatewayCard.language,
+                    cardToken: ko.observable(null),
+                    payuAgreement: ko.observable(true),
+                    payuStoreCard: ko.observable(true),
+                    payuMore1: ko.observable(false),
+                    payuMore2: ko.observable(false),
+                    useNewCard: ko.observable(false),
+                    storedCards: {
+                        list: window.checkoutConfig.payment.payuGatewayCard.storedCards,
+                        activeStatus: 'ACTIVE'
                     },
-                    /**
-                     * @returns {exports}
-                     */
-                    initObservable: function () {
-                        var that = this;
-                        this._super();
-
-                        this.storedCards = toArray(this.stored.list.cardTokens);
-                        this.storedPex = toArray(this.stored.list.pexTokens);
-
-                        if (!this.storedCardsExist()) {
-                            this.useNewCard(true);
-                        }
-
-                        this.isCardSelected = ko.computed(function () {
-                            return that.getCode() === that.isChecked();
-                        });
-
-                        this.setValidProp();
-                        this.setTokenCallback();
-
-                        return this;
-                    },
-
-                    /**
-                     * @return {String}
-                     */
-                    createWidgetElement: function () {
-                        var scriptAttributes = this.payuWidget.config,
-                            guestEmail = quote.guestEmail,
-                            attrString;
-
-                        if (!quote.isCustomerLoggedIn) {
-                            scriptAttributes = this.getWidgetConfig(guestEmail);
-                        }
-
-                        attrString = this.createScriptAttributesString(scriptAttributes);
-
-                        return '<script type="text/javascript" ' + attrString + '></script>';
-                    },
-
-                    /**
-                     * @param {String} guestEmail
-                     *
-                     * @return {Object}
-                     */
-                    getWidgetConfig: function (guestEmail) {
-                        var widgetConfig = {};
-                        $.ajax({
-                            url: url.build(this.sigUrl),
-                            data: {
-                                'email': guestEmail
+                    secureForm: window.checkoutConfig.payment.payuGatewayCard.secureFormConfig,
+                    secureFormError: ko.observable(''),
+                    secureFormOptions: {
+                        elementFormNumber: '#payu-card-number',
+                        elementFormDate: '#payu-card-date',
+                        elementFormCvv: '#payu-card-cvv',
+                        config: {
+                            cardIcon: true,
+                            placeholder: {
+                                number: '',
+                                cvv: ''
                             },
-                            async: false,
-                            dataType: 'json',
-                            /**
-                             * @param {String} response
-                             */
-                            success: function (response) {
-                                if (response.success && response.widgetConfig) {
-                                    widgetConfig = JSON.parse(response.widgetConfig);
+                            style: {
+                                basic: {
+                                    fontSize: '18px',
                                 }
-                            }
-                        });
-
-                        return widgetConfig;
-                    },
-
-                    /**
-                     * @return {String}
-                     */
-                    getCode: function () {
-                        return 'payu_gateway_card';
-                    },
-
-                    /**
-                     * @return {Object}
-                     */
-                    getData: function () {
-                        return {
-                            'method': this.item.method,
-                            'additional_data': {
-                                'payu_method': this.payuWidget.cardValue(),
-                                'payu_method_type': this.transferKey
-                            }
-                        };
+                            },
+                            lang: 'en'
+                        }
                     }
+                },
+
+                /**
+                 * @returns {exports.initialize}
+                 */
+                initialize: function () {
+                    this._super();
+
+                    this.secureFormOptions.config.lang = this.language;
+
+                    if (!this.storedCardsExist()) {
+                        this.useNewCard(true);
+                    }
+                    try {
+                        this.payuSDK = PayU(this.secureForm['posId'], true);
+                    } catch (e) {
+                        this.payuSDK = null
+                        console.log(e)
+                    }
+
+                    return this;
+                },
+
+                renderSecureForm: function () {
+                    this.secureForms = this.payuSDK.secureForms();
+                    this.secureFormNumber = this.secureForms.add('number', this.secureFormOptions.config);
+                    this.secureFormNumber.render(this.secureFormOptions.elementFormNumber);
+                    this.secureFormDate = this.secureForms.add('date', this.secureFormOptions.config);
+                    this.secureFormDate.render(this.secureFormOptions.elementFormDate);
+                    this.secureFormCvv = this.secureForms.add('cvv', this.secureFormOptions.config);
+                    this.secureFormCvv.render(this.secureFormOptions.elementFormCvv);
+                },
+
+                clearSecureForm: function () {
+                    this.secureFormNumber.clear();
+                    this.secureFormDate.clear();
+                    this.secureFormCvv.clear();
+                },
+
+                /**
+                 * @return {Object}
+                 */
+                getData: function () {
+                    return {
+                        'method': this.item.method,
+                        'additional_data': {
+                            'payu_method': this.cardToken(),
+                            'payu_method_type': this.transferKey
+                        }
+                    };
                 }
-            )
+            }
         );
     }
 );

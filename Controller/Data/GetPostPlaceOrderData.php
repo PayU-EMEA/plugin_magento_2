@@ -60,7 +60,6 @@ class GetPostPlaceOrderData extends Action
      */
     public function execute()
     {
-        $returnData = [static::SUCCESS_FIELD => false];
         try {
             /** @var $payment \Magento\Sales\Model\Order\Payment */
             $payment = $this->checkoutSession->getLastRealOrder()->getPayment();
@@ -85,7 +84,10 @@ class GetPostPlaceOrderData extends Action
                 ];
             }
         } catch (\Exception $exception) {
-            $returnData['message'] = $exception->getMessage();
+            $returnData = [
+                static::SUCCESS_FIELD => false,
+                'message' => $exception->getMessage()
+            ];
         }
 
         return $this->resultJsonFactory->create()->setData($returnData);

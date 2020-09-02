@@ -57,7 +57,7 @@ class ContinueCvv extends Template
     /**
      * Get config string for CVV widget
      *
-     * @return string|null
+     * @return string
      */
     public function getWidgetCvvConfig()
     {
@@ -68,30 +68,23 @@ class ContinueCvv extends Template
         if (is_array($paymentInformation) &&
             array_key_exists(PayUConfigInterface::PAYU_SHOW_CVV_WIDGET, $paymentInformation) &&
             $cvv !== null) {
-            $widgetConfig = $this->cardWidgetCVVConfig->execute(
-                $paymentInformation[PayUConfigInterface::PAYU_SHOW_CVV_WIDGET]
-            );
-            $jsonDecodeWidget = json_decode($widgetConfig, true);
-            array_walk(
-                $jsonDecodeWidget,
-                function (&$item, $value) {
-                    $item = sprintf('%s="%s"', $value, $item);
-                }
-            );
 
-            return implode(' ', $jsonDecodeWidget);
+            $secureFormCvvConfig = $this->cardWidgetCVVConfig->execute($paymentInformation[PayUConfigInterface::PAYU_SHOW_CVV_WIDGET]);
+            $secureFormCvvConfig['redirectUri'] = $this->getUrl('checkout/onepage/success');
+
+            return json_encode($secureFormCvvConfig);
         }
 
-        return null;
+        return json_encode([]);
     }
 
     /**
-     * Return redirect url after success cvv action
      *
      * @return string
      */
-    public function getRedirectUrl()
+    public function getEnv()
     {
-        return $this->getUrl('checkout/onepage/success');
+        return $this->cardWidgetCVVConfig->execute('')[PayUGetCreditCardCVVWidgetConfigInterface::CONFIG_ENV];
     }
+
 }

@@ -9,16 +9,6 @@ namespace PayU\PaymentGateway\Api;
 interface PayUConfigInterface
 {
     /**
-     * PayU Secure url
-     */
-    const PAYU_SECURE_URL = 'https://secure.payu.com';
-
-    /**
-     * PayU Sanbox url
-     */
-    const PAYU_SANDBOX_URL = 'https://secure.snd.payu.com';
-
-    /**
      * Method code key
      */
     const PAYU_METHOD_CODE = 'payu_method';

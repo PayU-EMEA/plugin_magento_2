@@ -3,73 +3,54 @@
 define(
     [
         'jquery',
-        'paymentExtended',
-        'gatewayMethods',
+        'paymentPblExtended',
         'ko',
-        'mage/translate',
-        'toArray'
     ],
-    function ($, Component, gatewayMethods, ko, $t, toArray) {
+    function ($,
+              Component,
+              ko
+    ) {
         'use strict';
 
         return Component.extend(
-            $.extend(
-                {},
-                gatewayMethods,
-                {
-                    defaults: {
-                        template: 'PayU_PaymentGateway/payment/payu_gateway',
-                        postPlaceOrderData: 'payu/data/getPostPlaceOrderData',
-                        logoSrc: window.checkoutConfig.payment.payuGateway.logoSrc,
-                        termsUrl: window.checkoutConfig.payment.payuGateway.termsUrl,
-                        transferKey: window.checkoutConfig.payment.payuGateway.transferKey,
-                        locale: window.checkoutConfig.payment.payuGateway.locale,
-                        methods: toArray(JSON.parse(window.checkoutConfig.payment.payuGateway.payByLinks)),
-                        payuMethod: ko.observable(false),
-                        payuAgreement: ko.observable(true),
-                        agreementText: $t('You must accept the "Terms of a single PayU payment transaction"'),
-                        payuMethodText: $t('You must select pay method.'),
-                        enabledStatus: 'ENABLED'
-                    },
+            {
+                defaults: {
+                    template: 'PayU_PaymentGateway/payment/payu_gateway',
+                    postPlaceOrderData: 'payu/data/getPostPlaceOrderData',
+                    logoSrc: window.checkoutConfig.payment.payuGateway.logoSrc,
+                    termsUrl: window.checkoutConfig.payment.payuGateway.termsUrl,
+                    transferKey: window.checkoutConfig.payment.payuGateway.transferKey,
+                    language: window.checkoutConfig.payment.payuGateway.language,
+                    methods: window.checkoutConfig.payment.payuGateway.payByLinks,
+                    payuMethod: ko.observable(null),
+                    payuAgreement: ko.observable(true),
+                    payuMore1: ko.observable(false),
+                    payuMore2: ko.observable(false),
+                    enabledStatus: 'ENABLED'
+                },
 
                     /**
                      * @return {exports}
                      */
-                    initObservable: function () {
-                        var that = this;
+                    initialize: function () {
                         this._super();
-
-                        this.isPayuSelected = ko.computed(function () {
-                            return that.getCode() === that.isChecked();
-                        });
-
-                        this.setValidProp();
-                        this.setSelectedSubscription();
 
                         return this;
                     },
 
-                    /**
-                     * @return {String}
-                     */
-                    getCode: function () {
-                        return 'payu_gateway';
-                    },
-
-                    /**
-                     * @return {Object}
-                     */
-                    getData: function () {
-                        return {
-                            'method': this.item.method,
-                            'additional_data': {
-                                'payu_method': this.payuMethod(),
-                                'payu_method_type': this.transferKey
-                            }
-                        };
-                    }
+                /**
+                 * @return {Object}
+                 */
+                getData: function () {
+                    return {
+                        'method': this.item.method,
+                        'additional_data': {
+                            'payu_method': this.payuMethod(),
+                            'payu_method_type': this.transferKey
+                        }
+                    };
                 }
-            )
+            }
         );
     }
 );

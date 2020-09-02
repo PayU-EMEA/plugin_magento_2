@@ -5,26 +5,37 @@
 ?>
 <?php
 $widgetConfig = $this->getWidgetCvvConfig();
-if ($widgetConfig !== null): ?>
+if ($widgetConfig): ?>
     <div class="payu-block">
         <div class="payu-block__wrapper">
             <div class="payu-block__header">
                 <h1><?php echo __('Confirm card CVV code:') ?></h1>
             </div>
             <div class="payu-block__content payu-block__content">
-                <div id="payu-widget"></div>
+                <div id="payu_gateway_card_cvv_slot" data-bind="scope: 'payu_gateway_card_cvv'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
             </div>
         </div>
     </div>
-    <script <?php echo $widgetConfig; ?>></script>
+    <script type="text/javascript">
+        window.payuConfig = {
+            env: "<?php echo $this->getEnv(); ?>"
+        }
+    </script>
     <script type="text/x-magento-init">
-            {
-                "*": {
-                    "tokenHandler": {
-                        "redirectUrl": "<?php echo $this->getRedirectUrl(); ?>"
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "payu_gateway_card_cvv": {
+                        "component" : "PayU_PaymentGateway/js/view/cvv/payu_gateway_card_cvv",
+                        "config" : <?php echo $widgetConfig; ?>
                     }
                 }
             }
+        }
+    }
     </script>
     <?php
 endif;

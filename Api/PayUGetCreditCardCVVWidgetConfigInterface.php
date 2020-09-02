@@ -9,27 +9,31 @@ namespace PayU\PaymentGateway\Api;
 interface PayUGetCreditCardCVVWidgetConfigInterface
 {
     /**
-     * Widget type key
+     * PayU SDK env key
      */
-    const CONFIG_WIDGET_TYPE_FIELD = 'widget-type';
+    const CONFIG_ENV = 'env';
+
+    /**
+     * Merchant POS ID key
+     */
+    const CONFIG_POS_ID = 'posId';
 
     /**
      * CVV url key
      */
-    const CONFIG_WIDGET_CVV_URL_FIELD = 'cvv-url';
+    const CONFIG_CVV_URL = 'cvvUrl';
 
     /**
-     * CVV success callbeck key
+     * Language key
      */
-    const CONFIG_WIDGET_CVV_SUCCESS_CALLBACK_FIELD = 'cvv-success-callback';
+    const CONFIG_LANGUAGE = 'language';
 
     /**
-     * Get CVV widget parameters config for html <script>
+     * Get CVV Secure Form parameters
      *
      * @param string $cvvUrl
-     * @param string $orderId
      *
-     * @return string
+     * @return array
      */
-    public function execute($cvvUrl, $orderId = null);
+    public function execute($cvvUrl);
 }
