@@ -7,7 +7,8 @@ define(
         'mage/url',
         'ko',
         'mage/translate',
-        'repay'
+        'repay',
+        'applePay'
     ],
     function (
         $,
@@ -15,7 +16,8 @@ define(
         url,
         ko,
         $t,
-        repayModel
+        repayModel,
+        applePay
     ) {
         'use strict';
 
@@ -36,6 +38,7 @@ define(
                  */
                 initialize: function () {
                     this._super();
+                    this.methods = applePay.filterApplePay(this.methods);
 
                     return this;
                 },

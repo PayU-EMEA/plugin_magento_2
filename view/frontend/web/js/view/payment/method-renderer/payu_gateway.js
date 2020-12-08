@@ -5,10 +5,12 @@ define(
         'jquery',
         'paymentPblExtended',
         'ko',
+        'applePay'
     ],
     function ($,
               Component,
-              ko
+              ko,
+              applePay
     ) {
         'use strict';
 
@@ -21,7 +23,6 @@ define(
                     termsUrl: window.checkoutConfig.payment.payuGateway.termsUrl,
                     transferKey: window.checkoutConfig.payment.payuGateway.transferKey,
                     language: window.checkoutConfig.payment.payuGateway.language,
-                    methods: window.checkoutConfig.payment.payuGateway.payByLinks,
                     payuMethod: ko.observable(null),
                     payuAgreement: ko.observable(true),
                     payuMore1: ko.observable(false),
@@ -34,6 +35,7 @@ define(
                      */
                     initialize: function () {
                         this._super();
+                        this.methods = applePay.filterApplePay(window.checkoutConfig.payment.payuGateway.payByLinks);
 
                         return this;
                     },

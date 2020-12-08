@@ -51,7 +51,7 @@ define(
              * @return {Boolean}
              */
             storedCardsExist: function () {
-                return this.storedCards.list.length > 0;
+                return Array.isArray(this.storedCards.list) && this.storedCards.list.length > 0;
             },
 
             /**
