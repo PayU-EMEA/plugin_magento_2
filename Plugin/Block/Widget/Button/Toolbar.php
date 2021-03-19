@@ -1,6 +1,6 @@
 <?php
 
-namespace Payu\PaymentGateway\Plugin\Block\Widget\Button;
+namespace PayU\PaymentGateway\Plugin\Block\Widget\Button;
 
 use Magento\Backend\Block\Widget\Button\Toolbar as ToolbarContext;
 use Magento\Framework\View\Element\AbstractBlock;
